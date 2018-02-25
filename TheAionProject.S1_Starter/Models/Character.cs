@@ -16,9 +16,9 @@ namespace TheAionProject
         public enum RaceType
         {
             None,
-            Human,
-            Thorian,
-            Xantorian
+            Pezzulk,
+            Ox,
+            Oehn
         }
 
         #endregion
