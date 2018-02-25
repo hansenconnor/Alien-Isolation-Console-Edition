@@ -16,10 +16,10 @@ namespace TheAionProject
         public enum RaceType
         {
             None,
+            Human,
             Pezzulk,
             Ox,
             Oehn,
-            anothaone
         }
 
         #endregion
