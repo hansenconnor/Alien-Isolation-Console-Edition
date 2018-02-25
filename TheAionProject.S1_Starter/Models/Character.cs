@@ -18,7 +18,8 @@ namespace TheAionProject
             None,
             Pezzulk,
             Ox,
-            Oehn
+            Oehn,
+            anothaone
         }
 
         #endregion
