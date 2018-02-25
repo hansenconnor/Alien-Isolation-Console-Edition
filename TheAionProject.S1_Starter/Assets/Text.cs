@@ -11,18 +11,17 @@ namespace TheAionProject
     /// </summary>
     public static class Text
     {
-        public static List<string> HeaderText = new List<string>() { "The Aion Project" };
-        public static List<string> FooterText = new List<string>() { "Laughing Leaf Productions, 2016" };
+        public static List<string> HeaderText = new List<string>() { "Alien Isolation - Console Edition" };
+        public static List<string> FooterText = new List<string>() { "Connor Hansen, 2016" };
 
         #region INTITIAL GAME SETUP
 
         public static string MissionIntro()
         {
             string messageBoxText =
-            "You have been hired by the Norlon Corporation to participate " +
-            "in its latest endeavor, the Aion Project. Your mission is to " +
-            "test the limits of the new Aion Engine and report back to " +
-            "the Norlon Corporation.\n" +
+            "You have narrowly escaped the alien and now you must escape the space station. " +
+            "Work your way to the bridge and reset the controls for the esape pods " +
+            "so you can make your escape. " +
             " \n" +
             "Press the Esc key to exit the game at any point.\n" +
             " \n" +
@@ -179,6 +178,7 @@ namespace TheAionProject
                 $"\tTraveler Age: {gameTraveler.Age}\n" +
                 $"\tTraveler Race: {gameTraveler.Race}\n" +
                 $"\tTraveler Home Planet: {gameTraveler.HomePlanet}\n" +
+                $"\tTraveler Home Planet: {gameTraveler.travelerCompanionName}\n" +
                 $"\tTraveler Greeting: {gameTraveler.Greeting()}\n" +
                 " \n";
 

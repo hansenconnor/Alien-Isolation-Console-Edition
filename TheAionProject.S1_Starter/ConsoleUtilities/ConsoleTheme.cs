@@ -46,9 +46,9 @@ namespace TheAionProject
         // message box colors
         //
         public static ConsoleColor MessageBoxBackgroundColor = ConsoleColor.Black;
-        public static ConsoleColor MessageBoxForegroundColor = ConsoleColor.Green;
+        public static ConsoleColor MessageBoxForegroundColor = ConsoleColor.Red;
         public static ConsoleColor MessageBoxBorderColor = ConsoleColor.Green;
-        public static ConsoleColor MessageBoxHeaderBackgroundColor = ConsoleColor.Green;
+        public static ConsoleColor MessageBoxHeaderBackgroundColor = ConsoleColor.Red;
         public static ConsoleColor MessageBoxHeaderForegroundColor = ConsoleColor.Red;
 
         //

@@ -191,15 +191,14 @@ namespace TheAionProject
 
             Console.SetCursorPosition(0, 10);
             string tabSpace = new String(' ', 35);
-            Console.WriteLine(tabSpace + @" _____ _              ___  _               ______          _           _   ");
-            Console.WriteLine(tabSpace + @"|_   _| |            / _ \(_)              | ___ \        (_)         | |  ");
-            Console.WriteLine(tabSpace + @"  | | | |__   ___   / /_\ \_  ___  _ __    | |_/ _ __ ___  _  ___  ___| |_ ");
-            Console.WriteLine(tabSpace + @"  | | | '_ \ / _ \  |  _  | |/ _ \| '_ \   |  __| '__/ _ \| |/ _ \/ __| __|");
-            Console.WriteLine(tabSpace + @"  | | | | | |  __/  | | | | | (_) | | | |  | |  | | | (_) | |  __| (__| |_ ");
-            Console.WriteLine(tabSpace + @"  \_/ |_| |_|\___|  \_| |_|_|\___/|_| |_|  \_|  |_|  \___/| |\___|\___|\__|");
-            Console.WriteLine(tabSpace + @"                                                         _/ |              ");
-            Console.WriteLine(tabSpace + @"                                                        |__/             ");
-
+            Console.WriteLine(tabSpace + @"  ___  _ _              _____          _       _   _             ");
+            Console.WriteLine(tabSpace + @" / _ \| (_)            |_   _|        | |     | | (_)            ");
+            Console.WriteLine(tabSpace + @"/ /_\ \ |_  ___ _ __     | | ___  ___ | | __ _| |_ _  ___  _ __  ");
+            Console.WriteLine(tabSpace + @"|  _  | | |/ _ \ '_ \    | |/ __|/ _ \| |/ _` | __| |/ _ \| '_ \ ");
+            Console.WriteLine(tabSpace + @"| | | | | |  __/ | | |  _| |\__ \ (_) | | (_| | |_| | (_) | | | |");
+            Console.WriteLine(tabSpace + @"\_| |_/_|_|\___|_| |_|  \___/___/\___/|_|\__,_|\__|_|\___/|_| |_|");
+            Console.WriteLine(tabSpace + @"                                                                 ");
+            Console.WriteLine(tabSpace + @"                         CONSOLE EDITION                         ");
             Console.SetCursorPosition(80, 25);
             Console.Write("Press any key to continue or Esc to exit.");
             keyPressed = Console.ReadKey();
@@ -483,7 +482,7 @@ namespace TheAionProject
             //
             // get name of traveler's companion
             //
-            DisplayGamePlayScreen("Mission Initialization - Companion Name", Text.InitializeMissionGetTravelerHomePlanet(traveler.Name), ActionMenu.MissionIntro, "");
+            DisplayGamePlayScreen("Mission Initialization - Companion Name", Text.InitializeMissionGetTravelerCompanionName(traveler), ActionMenu.MissionIntro, "");
             DisplayInputBoxPrompt("Enter your Companion's name: ");
             traveler.travelerCompanionName = GetCompanionName();
 
