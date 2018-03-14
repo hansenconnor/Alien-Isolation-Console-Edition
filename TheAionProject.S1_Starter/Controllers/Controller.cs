@@ -15,6 +15,7 @@ namespace TheAionProject
 
         private ConsoleView _gameConsoleView;
         private Traveler _gameTraveler;
+        private Map _gameMap;
         private bool _playingGame;
 
         #endregion
@@ -48,8 +49,10 @@ namespace TheAionProject
         /// </summary>
         private void InitializeGame()
         {
+           
             _gameTraveler = new Traveler();
             _gameConsoleView = new ConsoleView(_gameTraveler);
+            _gameMap = new Map();
             _playingGame = true;
 
             Console.CursorVisible = false;
@@ -89,37 +92,82 @@ namespace TheAionProject
             //
             // prepare game play screen
             //
+            // modify this method to remove action menu and add game map with player movement functionality
             _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrrentLocationInfo(), ActionMenu.MainMenu, "");
+
+            //
+            // draw the map
+            //
+            // SET 1,1 EQUAL TO PLAYER ICON (@)
+            _gameConsoleView.drawMap();
+
 
             //
             // game loop
             //
             while (_playingGame)
             {
+
+                //
+                // get the coordinates of the player's current location on the map
+                //
+                int[] currentPlayerMapPosition = _gameMap.getCurrentPosition();
+               
+                //
+                // player controls
+                //
+                ConsoleKeyInfo keyInfo;
+                keyInfo = Console.ReadKey(true);
+                switch (keyInfo.Key)
+                {
+                    case ConsoleKey.UpArrow:
+                        // pass current position to update map method and update current position/mapLayout
+                        _gameMap.updateMapLayout(currentPlayerMapPosition, keyInfo.Key);
+                        // display the updated map
+                        _gameConsoleView.displayUpdateMap(currentPlayerMapPosition);
+                        break;
+
+                    case ConsoleKey.DownArrow:
+                        Traveler.moveDown();
+                        break;
+
+                    case ConsoleKey.LeftArrow:
+                        Traveler.moveLeft();
+                        break;
+
+                    case ConsoleKey.RightArrow:
+                        Traveler.moveRight();
+                        break;
+                }
+
+
+
+
                 //
                 // get next game action from player
                 //
-                travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
+                // edit this method or create another method to get user movement input via 'asdf' or arrow keys
+                //travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
 
                 //
                 // choose an action based on the player's menu choice
                 //
-                switch (travelerActionChoice)
-                {
-                    case TravelerAction.None:
-                        break;
+                //switch (travelerActionChoice)
+                //{
+                //    case TravelerAction.None:
+                //        break;
 
-                    case TravelerAction.TravelerInfo:
-                        _gameConsoleView.DisplayTravelerInfo();
-                        break;
+                //    case TravelerAction.TravelerInfo:
+                //        _gameConsoleView.DisplayTravelerInfo();
+                //        break;
 
-                    case TravelerAction.Exit:
-                        _playingGame = false;
-                        break;
+                //    case TravelerAction.Exit:
+                //        _playingGame = false;
+                //        break;
 
-                    default:
-                        break;
-                }
+                //    default:
+                //        break;
+                // }
             }
 
             //
@@ -145,10 +193,14 @@ namespace TheAionProject
             {
                 _gameTraveler.EarthBorn = true;
             }       
-                        //
+            //
             // echo the traveler's info
             //
             _gameConsoleView.DisplayGamePlayScreen("Mission Initialization - Complete", Text.InitializeMissionEchoTravelerInfo(_gameTraveler), ActionMenu.MissionIntro, "");
+
+            // call displaygameplayscreen and pass player location as header text. Also draw/update map
+
+            
             _gameConsoleView.GetContinueKey();
         }
 

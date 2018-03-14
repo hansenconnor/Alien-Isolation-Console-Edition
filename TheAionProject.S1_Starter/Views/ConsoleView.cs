@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -208,6 +209,46 @@ namespace TheAionProject
             }
 
             return playing;
+        }
+
+        public void drawMap()
+        {
+
+            string[,] mapLayout = new string[6, 5]
+            {
+                {"#","#","#","#","#"},
+                {"#","-","-","-","#",},
+                {"#","-","-","-","#",},
+                {"#","-","-","-","#",},
+                {"#","-","-","-","#",},
+                {"#","#","#","#","#"}
+            };
+
+            int[] initialPosition = new int[] { 2, 2 };
+
+            int rowLength = mapLayout.GetLength(0);
+            int colLength = mapLayout.GetLength(1);
+
+            for (int i = 0; i < rowLength; i++)
+            {
+                for (int j = 0; j < colLength; j++)
+                {
+                    Console.Write(string.Format("{0} ", mapLayout[i, j]));
+                }
+                Console.Write(Environment.NewLine + Environment.NewLine);
+            }
+            Console.ReadLine();
+        }
+
+        public void displayUpdateMap(ConsoleKey keyDirection)
+        {
+            // iterate through map layout and find player icon. ( create map layout in map.cs )
+            
+            // use case statement to compare player key direction to respective array index value
+            // if wall, display error message, else, set new current position
+            // player.currentMapPosition = new Position;
+            //player.previous position = "-";
+            // update map.mapLayout and print the new layout 
         }
 
         /// <summary>
