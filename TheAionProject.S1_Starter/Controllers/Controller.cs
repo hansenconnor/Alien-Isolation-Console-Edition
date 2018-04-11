@@ -63,7 +63,7 @@ namespace TheAionProject
         /// </summary>
         private void ManageGameLoop()
         {
-            TravelerAction travelerActionChoice = TravelerAction.None;
+            //TravelerAction travelerActionChoice = TravelerAction.None;
 
             //
             // display splash screen
@@ -90,29 +90,38 @@ namespace TheAionProject
             InitializeMission();
 
             //
-            // prepare game play screen
+            // store initial map layout in 2D array
+            //
+            // string[,] gameMapArray = _gameMap.drawMap();
+            _gameMap.MapLayout = _gameMap.drawMap();
+
+            //
+            // convert initial map array to string
+            // 
+            string gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+
+            //
+            // create array to hold player row and col coords
+            // then get initial player position
+            int[] currentPlayerMapPosition = new int[2];
+            currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
+
+
+            //
+            // print the map
             //
             // modify this method to remove action menu and add game map with player movement functionality
-            _gameConsoleView.DisplayGamePlayScreen("Current Location", Text.CurrrentLocationInfo(), ActionMenu.MainMenu, "");
+            _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MainMenu, "");
 
             //
-            // draw the map
+            // 
             //
-            // SET 1,1 EQUAL TO PLAYER ICON (@)
-            _gameConsoleView.drawMap();
-
 
             //
             // game loop
             //
             while (_playingGame)
             {
-
-                //
-                // get the coordinates of the player's current location on the map
-                //
-                int[] currentPlayerMapPosition = _gameMap.getCurrentPosition();
-               
                 //
                 // player controls
                 //
@@ -121,22 +130,64 @@ namespace TheAionProject
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
-                        // pass current position to update map method and update current position/mapLayout
-                        _gameMap.updateMapLayout(currentPlayerMapPosition, keyInfo.Key);
-                        // display the updated map
-                        _gameConsoleView.displayUpdateMap(currentPlayerMapPosition);
-                        break;
 
+                        // get the players current position
+                        currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
+
+                        // update the game map array
+                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+
+                        // update the game map string
+                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+
+                        // display updated map
+                        _gameConsoleView.DisplayGamePlayScreen("Current Location",gameMapString, ActionMenu.MainMenu, "");
+
+                        break;
                     case ConsoleKey.DownArrow:
-                        Traveler.moveDown();
-                        break;
 
+                        // get the players current position
+                        currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
+
+                        // update the game map array
+                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+
+                        // update the game map string
+                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+
+                        // display updated map
+                        _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MainMenu, "");
+
+                        break;
                     case ConsoleKey.LeftArrow:
-                        Traveler.moveLeft();
-                        break;
 
+                        // get the players current position
+                        currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
+
+                        // update the game map array
+                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+
+                        // update the game map string
+                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+
+                        // display updated map
+                        _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MainMenu, "");
+
+                        break;
                     case ConsoleKey.RightArrow:
-                        Traveler.moveRight();
+
+                        // get the players current position
+                        currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
+
+                        // update the game map array
+                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+
+                        // update the game map string
+                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+
+                        // display updated map
+                        _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MainMenu, "");
+
                         break;
                 }
 

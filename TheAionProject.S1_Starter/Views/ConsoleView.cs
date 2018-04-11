@@ -224,7 +224,7 @@ namespace TheAionProject
                 {"#","#","#","#","#"}
             };
 
-            int[] initialPosition = new int[] { 2, 2 };
+            //int[] initialPosition = new int[] { 2, 2 };
 
             int rowLength = mapLayout.GetLength(0);
             int colLength = mapLayout.GetLength(1);

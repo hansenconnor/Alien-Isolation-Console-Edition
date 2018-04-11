@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,44 +10,160 @@ namespace TheAionProject
 {
     public class Map
     {
-        // add propf for mapLayout
 
-        public int[] drawMap()
+        private string[,] _mapLayout;
+        private string _mapString;
+
+        public string MapString
         {
-
-            string[,] mapLayout = new string[6, 5]
-            {
-                {"#","#","#","#","#"},
-                {"#","-","-","-","#",},
-                {"#","-","-","-","#",},
-                {"#","-","-","-","#",},
-                {"#","-","-","-","#",},
-                {"#","#","#","#","#"}
-            };
-
-            int[] initialPosition = new int[] { 2, 2 };
-
-            int rowLength = mapLayout.GetLength(0);
-            int colLength = mapLayout.GetLength(1);
-
-            for (int i = 0; i < rowLength; i++)
-            {
-                for (int j = 0; j < colLength; j++)
-                {
-                    Console.Write(string.Format("{0} ", mapLayout[i, j]));
-                }
-                Console.Write(Environment.NewLine + Environment.NewLine);
-            }
-            Console.ReadLine();
-            return initialPosition;
+            get { return _mapString; }
+            set { _mapString = value; }
         }
 
-        public int[] getCurrentPosition()
+
+        public string[,] MapLayout
         {
-            int[] currentMapPosition = new int[] { 2, 2 };
+            get { return _mapLayout; }
+            set { _mapLayout = value; }
+        }
+
+        public string[,] drawMap()
+        {
+
+            string[,] mapLayout = new string[6, 10]
+            {
+                {"#","#","#","#","#","#","#","#","#","#"},
+                {"#","-","-","-","-","-","-","-","-","#"},
+                {"#","-","-","-","-","-","-","-","-","#"},
+                {"#","-","-","-","-","-","-","-","-","#"},
+                {"#","-","-","-","-","-","-","-","-","#"},
+                {"#","#","#","#","#","#","#","#","#","#"}
+            };
+
+            mapLayout[2, 2] = "@";
+
+            return mapLayout;
+        }
+
+        // possibly update method to return pair of ints ( xCoor,yCoord ) instead of array of length 2
+        public int[] getCurrentPosition(string[,] mapLayout)
+        {
+            int[] currentMapPosition = new int[2];
+
+            for (int i = 0; i < mapLayout.GetLength(0); i++) // row
+            {
+                for (int j = 0; j < mapLayout.GetLength(1); j++) // col
+                {
+                    Debug.WriteLine(i + j);
+                    if (mapLayout[i,j] == "@")
+                    {
+                        currentMapPosition[0] = i;
+                        currentMapPosition[1] = j;
+                    };
+                }
+            }
             // iterate through mapLaout and find player icon
             // return coordinates of player icon
             return currentMapPosition;
+        }
+
+        // take the current player position and redraw the map
+        // update this method to take key as parameter ( up, down, left, right )
+        // then determine new coords
+        public string[,] updateMap( string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection )
+        {
+            // variables to hold new row,col
+            int newRow = 0;
+            int newCol = 0;
+
+            // variables to hold old row,col
+            int oldRow = 0;
+            int oldCol = 0;
+
+            switch (keyDirection)
+            {
+                // up arrow was pressed
+                case ConsoleKey.UpArrow:
+                    newRow = currentPosition[0] - 1;
+                    newCol = currentPosition[1]; 
+                   
+                    oldRow = currentPosition[0]; // old row
+                    oldCol = currentPosition[1]; // old col
+
+                    // update the new cell
+                    mapLayout[newRow, newCol] = "@";
+
+                    // update the old cell
+                    mapLayout[oldRow, oldCol] = "-";
+                    //mapLayout[3nd row, 3rd column]
+                    break;
+
+                // down arrow was pressed
+                case ConsoleKey.DownArrow:
+                    newRow = currentPosition[0] + 1;
+                    newCol = currentPosition[1]; 
+                    
+                    oldRow = currentPosition[0]; // old row
+                    oldCol = currentPosition[1]; // old col
+
+                    // update the new cell
+                    mapLayout[newRow, newCol] = "@";
+
+                    // update the old cell
+                    mapLayout[oldRow, oldCol] = "-";
+                    //mapLayout[3nd row, 3rd column]
+                    break;
+                // left arrow was pressed
+                case ConsoleKey.LeftArrow:
+                    newRow = currentPosition[0];
+                    newCol = currentPosition[1] - 1;
+
+                    oldRow = currentPosition[0]; // old row
+                    oldCol = currentPosition[1]; // old col
+
+                    // update the new cell
+                    mapLayout[newRow, newCol] = "@";
+
+                    // update the old cell
+                    mapLayout[oldRow, oldCol] = "-";
+                    //mapLayout[3nd row, 3rd column]
+                    break;
+                // right arrow was pressed
+                case ConsoleKey.RightArrow:
+                    newRow = currentPosition[0];
+                    newCol = currentPosition[1] + 1;
+
+                    oldRow = currentPosition[0]; // old row
+                    oldCol = currentPosition[1]; // old col
+
+                    // update the new cell
+                    mapLayout[newRow, newCol] = "@";
+
+                    // update the old cell
+                    mapLayout[oldRow, oldCol] = "-";
+                    //mapLayout[3nd row, 3rd column]
+                    break;
+            }
+            return mapLayout;
+        }
+
+
+        // take the 2D map array and convert to a string
+        public string convertMapToString(string[,] mapLayout)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Clear();
+
+            for (int i = 0; i < mapLayout.GetLength(0); i++)
+            {
+                for (int j = 0; j < mapLayout.GetLength(1); j++)
+                {
+                    sb.Append(mapLayout[i, j]);
+                }
+                sb.Append(Environment.NewLine);
+            }
+
+            return sb.ToString();
         }
 
 
