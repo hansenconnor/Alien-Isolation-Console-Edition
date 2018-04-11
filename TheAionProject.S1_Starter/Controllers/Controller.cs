@@ -127,6 +127,15 @@ namespace TheAionProject
                 //
                 ConsoleKeyInfo keyInfo;
                 keyInfo = Console.ReadKey(true);
+                
+                //
+                // TODO validate key from list of valid keys
+                //
+
+                //
+                // TODO if valid key call method ( processKeyStroke ) which moves player, handles NPC interaction, etc.
+                //
+
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:

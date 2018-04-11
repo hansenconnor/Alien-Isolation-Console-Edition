@@ -85,17 +85,35 @@ namespace TheAionProject
                 // up arrow was pressed
                 case ConsoleKey.UpArrow:
                     newRow = currentPosition[0] - 1;
-                    newCol = currentPosition[1]; 
-                   
+                    newCol = currentPosition[1];
+
                     oldRow = currentPosition[0]; // old row
                     oldCol = currentPosition[1]; // old col
 
-                    // update the new cell
-                    mapLayout[newRow, newCol] = "@";
+                    //
+                    // check the requested cell for map object type
+                    //
+                    if (mapLayout[newRow,newCol] == "#")
+                    {
+                        Console.WriteLine("That's a wall! You can't go that way!");
+                    }
+                    else if (mapLayout[newRow, newCol] == "T")
+                    {
+                        Console.WriteLine("A troll appears!");
+                        // do some action
+                    }
+                    else // update player position
+                    {
+                        // update the new cell
+                        mapLayout[newRow, newCol] = "@";
 
-                    // update the old cell
-                    mapLayout[oldRow, oldCol] = "-";
-                    //mapLayout[3nd row, 3rd column]
+                        // update the old cell
+                        mapLayout[oldRow, oldCol] = "-";
+                    }
+
+
+
+
                     break;
 
                 // down arrow was pressed
