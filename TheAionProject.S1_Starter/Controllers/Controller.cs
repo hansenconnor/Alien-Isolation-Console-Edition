@@ -136,6 +136,11 @@ namespace TheAionProject
                 // TODO if valid key call method ( processKeyStroke ) which moves player, handles NPC interaction, etc.
                 //
 
+                //
+                // TODO only redraw the map cells that were modified
+                // don't redraw the entire screen
+                //
+
                 switch (keyInfo.Key)
                 {
                     case ConsoleKey.UpArrow:
