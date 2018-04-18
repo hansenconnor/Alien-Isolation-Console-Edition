@@ -30,15 +30,38 @@ namespace TheAionProject
         public string[,] drawMap()
         {
 
-            string[,] mapLayout = new string[6, 10]
+            int rows = 20;
+            int columns = 115;
+
+            string[,] mapLayout = new string[rows, columns];
+
+            for (int i = 1; i != rows - 1; i++)
             {
-                {"#","#","#","#","#","#","#","#","#","#"},
-                {"#","-","-","-","-","-","-","-","-","#"},
-                {"#","-","-","-","-","-","-","-","-","#"},
-                {"#","-","-","-","-","-","-","-","-","#"},
-                {"#","-","-","-","-","-","-","-","-","#"},
-                {"#","#","#","#","#","#","#","#","#","#"}
-            };
+                mapLayout[i, 0] = "#";
+                mapLayout[i, columns - 1] = "#";
+            }
+
+
+            for (int i = 0; i != rows; i++)
+            {
+                if ((i == 0) || (i == rows - 1))
+                {
+                    // first or last row so only draw walls
+                    for (int j = 0; j < columns; j++)
+                    {
+                        mapLayout[i, j] = "#";
+                    }
+                }
+                else
+                {
+                    // not first or last row so draw cells
+                    for (int j = 1; j < columns - 1; j++)
+                    {
+                        mapLayout[i, j] = "-";
+                    }
+                }
+            }
+
 
             mapLayout[2, 2] = "@";
 

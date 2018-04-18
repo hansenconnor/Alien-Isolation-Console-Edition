@@ -79,6 +79,19 @@ namespace TheAionProject
             DisplayStatusBox();
         }
 
+        // Function to redraw the map
+        public void DisplayRedrawMap(string messageBoxHeaderText, string messageBoxText, Menu menu, string inputBoxPrompt)
+        {
+
+            ConsoleWindowHelper.DisplayHeader(Text.HeaderText);
+            ConsoleWindowHelper.DisplayFooter(Text.FooterText);
+
+            DisplayMessageBox(messageBoxHeaderText, messageBoxText);
+            DisplayMenuBox(menu);
+            DisplayInputBox();
+            DisplayStatusBox();
+        }
+
         /// <summary>
         /// wait for any keystroke to continue
         /// </summary>

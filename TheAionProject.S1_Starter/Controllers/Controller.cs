@@ -155,7 +155,7 @@ namespace TheAionProject
                         gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
 
                         // display updated map
-                        _gameConsoleView.DisplayGamePlayScreen("Current Location",gameMapString, ActionMenu.MainMenu, "");
+                        _gameConsoleView.DisplayRedrawMap("Current Location",gameMapString, ActionMenu.MainMenu, "");
 
                         break;
                     case ConsoleKey.DownArrow:
@@ -170,7 +170,7 @@ namespace TheAionProject
                         gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
 
                         // display updated map
-                        _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MainMenu, "");
+                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
 
                         break;
                     case ConsoleKey.LeftArrow:
@@ -185,7 +185,7 @@ namespace TheAionProject
                         gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
 
                         // display updated map
-                        _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MainMenu, "");
+                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
 
                         break;
                     case ConsoleKey.RightArrow:
@@ -200,7 +200,7 @@ namespace TheAionProject
                         gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
 
                         // display updated map
-                        _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MainMenu, "");
+                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
 
                         break;
                 }
