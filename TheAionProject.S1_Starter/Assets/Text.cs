@@ -12,7 +12,7 @@ namespace TheAionProject
     public static class Text
     {
         public static List<string> HeaderText = new List<string>() { "Alien Isolation - Console Edition" };
-        public static List<string> FooterText = new List<string>() { "Connor Hansen, 2016" };
+        public static List<string> FooterText = new List<string>() { "Connor Hansen, 2018" };
 
         #region INTITIAL GAME SETUP
 

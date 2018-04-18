@@ -114,8 +114,8 @@ namespace TheAionProject
             _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MainMenu, "");
 
             //
-            // 
-            //
+            // set initial menu status
+            bool inMenu = false;
 
             //
             // game loop
@@ -124,115 +124,35 @@ namespace TheAionProject
             {
                 //
                 // player controls
-                //
                 ConsoleKeyInfo keyInfo;
                 keyInfo = Console.ReadKey(true);
-                
-                //
-                // TODO validate key from list of valid keys
-                //
 
                 //
-                // TODO if valid key call method ( processKeyStroke ) which moves player, handles NPC interaction, etc.
-                //
-
-                //
-                // TODO only redraw the map cells that were modified
-                // don't redraw the entire screen
-                //
-
-                switch (keyInfo.Key)
+                // validate key from list of valid keys
+                while (!KeyStrokes.validKeyStrokes.Contains(keyInfo.Key))
                 {
-                    case ConsoleKey.UpArrow:
-
-                        // get the players current position
-                        currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
-
-                        // update the game map array
-                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
-
-                        // update the game map string
-                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
-
-                        // display updated map
-                        _gameConsoleView.DisplayRedrawMap("Current Location",gameMapString, ActionMenu.MainMenu, "");
-
-                        break;
-                    case ConsoleKey.DownArrow:
-
-                        // get the players current position
-                        currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
-
-                        // update the game map array
-                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
-
-                        // update the game map string
-                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
-
-                        // display updated map
-                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
-
-                        break;
-                    case ConsoleKey.LeftArrow:
-
-                        // get the players current position
-                        currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
-
-                        // update the game map array
-                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
-
-                        // update the game map string
-                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
-
-                        // display updated map
-                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
-
-                        break;
-                    case ConsoleKey.RightArrow:
-
-                        // get the players current position
-                        currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
-
-                        // update the game map array
-                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
-
-                        // update the game map string
-                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
-
-                        // display updated map
-                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
-
-                        break;
+                    _gameConsoleView.DisplayInputErrorMessage("That's not a valid key! Please try again...");
                 }
-
-
-
+                //
+                // key is valid -> handle key
+                _gameMap.handleKeyStroke(keyInfo.Key);
 
                 //
-                // get next game action from player
-                //
-                // edit this method or create another method to get user movement input via 'asdf' or arrow keys
-                //travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu);
+                // move this to handleKeyStroke method inside of the Map class
+                if ((keyInfo.Key == ConsoleKey.UpArrow) || (keyInfo.Key == ConsoleKey.DownArrow) || (keyInfo.Key == ConsoleKey.LeftArrow) || (keyInfo.Key == ConsoleKey.RightArrow))
+                {
+                    // get the players current position
+                    currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
 
-                //
-                // choose an action based on the player's menu choice
-                //
-                //switch (travelerActionChoice)
-                //{
-                //    case TravelerAction.None:
-                //        break;
+                    // update the game map array
+                    _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
 
-                //    case TravelerAction.TravelerInfo:
-                //        _gameConsoleView.DisplayTravelerInfo();
-                //        break;
+                    // update the game map string
+                    gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
 
-                //    case TravelerAction.Exit:
-                //        _playingGame = false;
-                //        break;
-
-                //    default:
-                //        break;
-                // }
+                    // display updated map
+                    _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
+                }
             }
 
             //
@@ -265,7 +185,6 @@ namespace TheAionProject
 
             // call displaygameplayscreen and pass player location as header text. Also draw/update map
 
-            
             _gameConsoleView.GetContinueKey();
         }
 

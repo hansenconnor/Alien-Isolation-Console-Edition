@@ -11,6 +11,27 @@ namespace TheAionProject
     /// </summary>
     public static class ActionMenu
     {
+        public enum CurrentMenu
+        {
+            MissionIntro,
+            InitializeMission,
+            MainMenu,
+            AdminMenu,
+            ItemMenu
+        }
+
+        public static CurrentMenu currentMenu = CurrentMenu.MainMenu;
+
+        public static Menu ItemMenu = new Menu()
+        {
+            MenuName = "ItemMenu",
+            MenuTitle = "",
+            MenuChoices = new Dictionary<char, TravelerAction>()
+                    {
+                        { ' ', TravelerAction.None }
+                    }
+        };
+
         public static Menu MissionIntro = new Menu()
         {
             MenuName = "MissionIntro",

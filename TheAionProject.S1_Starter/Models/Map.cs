@@ -30,6 +30,10 @@ namespace TheAionProject
         public string[,] drawMap()
         {
 
+            //
+            // TODO update array to hold map objects
+            //
+
             int rows = 20;
             int columns = 115;
 
@@ -37,10 +41,10 @@ namespace TheAionProject
 
             for (int i = 1; i != rows - 1; i++)
             {
+                // not first or last row so set first and last col of each row to be a wall
                 mapLayout[i, 0] = "#";
                 mapLayout[i, columns - 1] = "#";
             }
-
 
             for (int i = 0; i != rows; i++)
             {
@@ -54,14 +58,13 @@ namespace TheAionProject
                 }
                 else
                 {
-                    // not first or last row so draw cells
+                    // not first or last row so draw cells between first and last col
                     for (int j = 1; j < columns - 1; j++)
                     {
                         mapLayout[i, j] = "-";
                     }
                 }
             }
-
 
             mapLayout[2, 2] = "@";
 
@@ -133,10 +136,6 @@ namespace TheAionProject
                         // update the old cell
                         mapLayout[oldRow, oldCol] = "-";
                     }
-
-
-
-
                     break;
 
                 // down arrow was pressed
@@ -207,6 +206,10 @@ namespace TheAionProject
             return sb.ToString();
         }
 
-
+        // method to process player keystrokes
+        public void handleKeyStroke(ConsoleKey keyPressed)
+        {
+            // determine if player is navigating menu or map
+        }
     }
 }
