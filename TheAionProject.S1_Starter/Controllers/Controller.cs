@@ -129,10 +129,10 @@ namespace TheAionProject
 
                 //
                 // validate key from list of valid keys
-                while (!KeyStrokes.validKeyStrokes.Contains(keyInfo.Key))
-                {
-                    _gameConsoleView.DisplayInputErrorMessage("That's not a valid key! Please try again...");
-                }
+                //while (!KeyStrokes.validKeyStrokes.Contains(keyInfo.Key))
+                //{
+                //    _gameConsoleView.DisplayInputErrorMessage("That's not a valid key! Please try again...");
+                //}
                 //
                 // key is valid -> handle key
                 _gameMap.handleKeyStroke(keyInfo.Key);

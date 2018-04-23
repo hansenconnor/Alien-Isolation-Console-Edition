@@ -20,7 +20,6 @@ namespace TheAionProject
             set { _mapString = value; }
         }
 
-
         public string[,] MapLayout
         {
             get { return _mapLayout; }
@@ -66,7 +65,17 @@ namespace TheAionProject
                 }
             }
 
+            //
+            // add player to map
             mapLayout[2, 2] = "@";
+
+            //
+            // add NPC to map
+            mapLayout[5, 5] = Universe.NPCs[0].Icon;
+
+            //
+            // add key object to map
+            mapLayout[2, 5] = "K";
 
             return mapLayout;
         }
@@ -119,22 +128,35 @@ namespace TheAionProject
                     //
                     // check the requested cell for map object type
                     //
+                    // TODO call a function here
+
+                    // check if wall
                     if (mapLayout[newRow,newCol] == "#")
                     {
                         Console.WriteLine("That's a wall! You can't go that way!");
                     }
-                    else if (mapLayout[newRow, newCol] == "T")
-                    {
-                        Console.WriteLine("A troll appears!");
-                        // do some action
-                    }
-                    else // update player position
+                    // check if empty cell
+                    else if (mapLayout[newRow, newCol] == "-")
                     {
                         // update the new cell
                         mapLayout[newRow, newCol] = "@";
 
                         // update the old cell
                         mapLayout[oldRow, oldCol] = "-";
+                    }
+                    // check if NPC
+                    else 
+                    {
+                        foreach (NPC npc in Universe.NPCs)
+                        {
+                            if (npc.Icon == mapLayout[newRow,newCol])
+                            {
+                                // display NPC menu
+                                Console.WriteLine(npc.Name);
+                                Console.ReadLine();
+                                break;
+                            }
+                        }
                     }
                     break;
 

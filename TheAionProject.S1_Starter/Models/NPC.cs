@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
-    public class MapObject : GameObject
+    public class NPC : Character
     {
         private bool _interactable;
         private string _icon;
@@ -23,6 +23,5 @@ namespace TheAionProject
             get { return _interactable; }
             set { _interactable = value; }
         }
-
     }
 }
