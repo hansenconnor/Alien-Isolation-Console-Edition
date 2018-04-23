@@ -71,7 +71,7 @@ namespace TheAionProject
         #region METHODS
         public override string Greeting()
         {
-            return $"Hello, my name is {base.Name}, I am a {base.Race}, and I am from {_homePlanet}.";
+            return $"Hello, my name is {Name}, I am a {Race}, and I am from {_homePlanet}.";
         }
 
 

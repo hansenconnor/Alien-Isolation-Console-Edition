@@ -17,7 +17,6 @@ namespace TheAionProject
             set { _icon = value; }
         }
 
-
         public bool Interactable
         {
             get { return _interactable; }

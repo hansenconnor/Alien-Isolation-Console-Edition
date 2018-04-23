@@ -78,11 +78,10 @@ namespace TheAionProject
         #endregion
 
         #region METHODS
-        public virtual string Greeting()
+       public virtual string Greeting()
         {
-            return $"Hello, my name is {_name} and I am a {_race}.";
+           return $"Hello, my name is {_name} and I am a {_race}.";
         }
-
 
         #endregion
     }

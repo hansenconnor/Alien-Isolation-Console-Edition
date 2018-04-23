@@ -107,6 +107,33 @@ namespace TheAionProject
         // then determine new coords
         public string[,] updateMap( string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection )
         {
+            switch (keyDirection)
+            {
+                // up arrow was pressed
+                case ConsoleKey.UpArrow:
+                    mapLayout = moveUp(mapLayout, currentPosition, keyDirection);
+                    break;
+                // down arrow was pressed
+                case ConsoleKey.DownArrow:
+                    mapLayout = moveDown(mapLayout, currentPosition, keyDirection);
+                    break;
+                // left arrow was pressed
+                case ConsoleKey.LeftArrow:
+                    mapLayout = moveLeft(mapLayout, currentPosition, keyDirection);
+                    break;
+                // right arrow was pressed
+                case ConsoleKey.RightArrow:
+                    mapLayout = moveRight(mapLayout, currentPosition, keyDirection);
+                    break;
+            }
+            return mapLayout;
+        }
+
+        //
+        // Player movement methods
+        //
+        public string[,] moveUp( string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection )
+        {
             // variables to hold new row,col
             int newRow = 0;
             int newCol = 0;
@@ -115,96 +142,132 @@ namespace TheAionProject
             int oldRow = 0;
             int oldCol = 0;
 
-            switch (keyDirection)
+            // update position
+            newRow = currentPosition[0] - 1;
+            newCol = currentPosition[1];
+
+            oldRow = currentPosition[0]; // old row
+            oldCol = currentPosition[1]; // old col
+
+            // check cell type
+            mapLayout = getCellType(mapLayout,currentPosition,keyDirection,newRow,newCol,oldRow,oldCol);
+
+            return mapLayout;
+        }
+
+        public string[,] moveDown(string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection)
+        {
+            // variables to hold new row,col
+            int newRow = 0;
+            int newCol = 0;
+
+            // variables to hold old row,col
+            int oldRow = 0;
+            int oldCol = 0;
+
+            // update position
+            newRow = currentPosition[0] + 1;
+            newCol = currentPosition[1];
+
+            oldRow = currentPosition[0]; // old row
+            oldCol = currentPosition[1]; // old col
+
+            // update the new cell
+            mapLayout[newRow, newCol] = "@";
+
+            // update the old cell
+            mapLayout[oldRow, oldCol] = "-";
+            //mapLayout[3nd row, 3rd column]
+
+            return mapLayout;
+        }
+        public string[,] moveLeft(string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection)
+        {
+            // variables to hold new row,col
+            int newRow = 0;
+            int newCol = 0;
+
+            // variables to hold old row,col
+            int oldRow = 0;
+            int oldCol = 0;
+
+            // update position
+            newRow = currentPosition[0];
+            newCol = currentPosition[1] - 1;
+
+            oldRow = currentPosition[0]; // old row
+            oldCol = currentPosition[1]; // old col
+
+            // update the new cell
+            mapLayout[newRow, newCol] = "@";
+
+            // update the old cell
+            mapLayout[oldRow, oldCol] = "-";
+            //mapLayout[3nd row, 3rd column]
+
+            return mapLayout;
+        }
+        public string[,] moveRight(string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection)
+        {
+            // variables to hold new row,col
+            int newRow = 0;
+            int newCol = 0;
+
+            // variables to hold old row,col
+            int oldRow = 0;
+            int oldCol = 0;
+
+            // update position
+            newRow = currentPosition[0];
+            newCol = currentPosition[1] + 1;
+
+            oldRow = currentPosition[0]; // old row
+            oldCol = currentPosition[1]; // old col
+
+            // update the new cell
+            mapLayout[newRow, newCol] = "@";
+
+            // update the old cell
+            mapLayout[oldRow, oldCol] = "-";
+            //mapLayout[3nd row, 3rd column]
+
+            return mapLayout;
+        }
+
+        //
+        // determine cell type and interactivity
+        //
+        // TODO call this method in the controller so I have access to _gameConsoleView Header text 
+        public string[,] getCellType(string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection, int newRow, int newCol, int oldRow, int oldCol)
+        {
+            // check if wall
+            if (mapLayout[newRow, newCol] == "#")
             {
-                // up arrow was pressed
-                case ConsoleKey.UpArrow:
-                    newRow = currentPosition[0] - 1;
-                    newCol = currentPosition[1];
+                Console.WriteLine("That's a wall! You can't go that way!");
+            }
+            // check if empty cell
+            else if (mapLayout[newRow, newCol] == "-")
+            {
+                // update the new cell
+                mapLayout[newRow, newCol] = "@";
 
-                    oldRow = currentPosition[0]; // old row
-                    oldCol = currentPosition[1]; // old col
-
-                    //
-                    // check the requested cell for map object type
-                    //
-                    // TODO call a function here
-
-                    // check if wall
-                    if (mapLayout[newRow,newCol] == "#")
+                // update the old cell
+                mapLayout[oldRow, oldCol] = "-";
+            }
+            // check if NPC
+            else
+            {
+                foreach (NPC npc in Universe.NPCs)
+                {
+                    if (npc.Icon == mapLayout[newRow, newCol])
                     {
-                        Console.WriteLine("That's a wall! You can't go that way!");
+                        // display NPC menu
+                        Console.WriteLine(npc.Name);
+                        // TODO: need to return the npc or dialogue to call _gameConsoleView display Message box
+                        Console.ReadLine();
+                        break;
                     }
-                    // check if empty cell
-                    else if (mapLayout[newRow, newCol] == "-")
-                    {
-                        // update the new cell
-                        mapLayout[newRow, newCol] = "@";
-
-                        // update the old cell
-                        mapLayout[oldRow, oldCol] = "-";
-                    }
-                    // check if NPC
-                    else 
-                    {
-                        foreach (NPC npc in Universe.NPCs)
-                        {
-                            if (npc.Icon == mapLayout[newRow,newCol])
-                            {
-                                // display NPC menu
-                                Console.WriteLine(npc.Name);
-                                Console.ReadLine();
-                                break;
-                            }
-                        }
-                    }
-                    break;
-
-                // down arrow was pressed
-                case ConsoleKey.DownArrow:
-                    newRow = currentPosition[0] + 1;
-                    newCol = currentPosition[1]; 
-                    
-                    oldRow = currentPosition[0]; // old row
-                    oldCol = currentPosition[1]; // old col
-
-                    // update the new cell
-                    mapLayout[newRow, newCol] = "@";
-
-                    // update the old cell
-                    mapLayout[oldRow, oldCol] = "-";
-                    //mapLayout[3nd row, 3rd column]
-                    break;
-                // left arrow was pressed
-                case ConsoleKey.LeftArrow:
-                    newRow = currentPosition[0];
-                    newCol = currentPosition[1] - 1;
-
-                    oldRow = currentPosition[0]; // old row
-                    oldCol = currentPosition[1]; // old col
-
-                    // update the new cell
-                    mapLayout[newRow, newCol] = "@";
-
-                    // update the old cell
-                    mapLayout[oldRow, oldCol] = "-";
-                    //mapLayout[3nd row, 3rd column]
-                    break;
-                // right arrow was pressed
-                case ConsoleKey.RightArrow:
-                    newRow = currentPosition[0];
-                    newCol = currentPosition[1] + 1;
-
-                    oldRow = currentPosition[0]; // old row
-                    oldCol = currentPosition[1]; // old col
-
-                    // update the new cell
-                    mapLayout[newRow, newCol] = "@";
-
-                    // update the old cell
-                    mapLayout[oldRow, oldCol] = "-";
-                    //mapLayout[3nd row, 3rd column]
-                    break;
+                }
             }
             return mapLayout;
         }
