@@ -112,9 +112,6 @@ namespace TheAionProject
             //
             _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MapMenu, "");
 
-            bool canMove = true;
-            bool inMenu = false;
-
             //
             // game loop
             //
@@ -130,14 +127,45 @@ namespace TheAionProject
                     // get the players current position
                     currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
 
-                    // update the game map array
-                    _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+                    // get the icon for the desired tile
+                    string nextTile = _gameMap.getTileIcon();
 
-                    // update the game map string
-                    gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+                    // refactor update map to check if desired position is available or if there is an NPC or item etc.
+                    // refactor update map to return bool 
+                    bool validTile = _gameMap.validateCellType(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
 
-                    // display updated map
-                    _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
+
+                    if (validTile)
+                    {
+                        // get tile type and determine interaction i.e. item, door, NPC, etc.
+                        // GameObject cellObject = _gameMap.getCellType(nextTile);
+
+                        // determine cell type
+                        if (nextTile.GetType() == typeof(NPC))
+                        {
+                            // display the NPC menu
+                            foreach (NPC npc in Universe.NPCs)
+                            {
+                                if (npc.Icon == nextTile)
+                                {
+
+                                }
+                            }
+                        }
+
+                        // update the game map array
+                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+
+                        // update the game map string
+                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+
+                        // display updated map
+                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
+                    }
+                    else
+                    {
+
+                    }
                 }
                 
                 if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MapMenu)
@@ -147,11 +175,6 @@ namespace TheAionProject
                 else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MainMenu)
                 {
                     travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu, keyInfo);
-                }
-                // check if player is in a menu that prevents movement
-                else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.NPCMenu)
-                {
-                    canMove = false;
                 }
 
                 switch (travelerActionChoice)

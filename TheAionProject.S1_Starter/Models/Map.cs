@@ -272,6 +272,51 @@ namespace TheAionProject
             return mapLayout;
         }
 
+        public bool validateCellType( string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection )
+        {
+            // variables to hold new row,col
+            int newRow = 0;
+            int newCol = 0;
+
+            // variables to hold old row,col
+            int oldRow = 0;
+            int oldCol = 0;
+
+            switch (keyDirection)
+            {
+                case ConsoleKey.UpArrow:
+                    newRow = currentPosition[0] - 1;
+                    newCol = currentPosition[1];
+                    break;
+                case ConsoleKey.DownArrow:
+                    newRow = currentPosition[0] + 1;
+                    newCol = currentPosition[1];
+                    break;
+                case ConsoleKey.LeftArrow:
+                    newRow = currentPosition[0];
+                    newCol = currentPosition[1] - 1;
+                    break;
+                case ConsoleKey.RightArrow:
+                    newRow = currentPosition[0];
+                    newCol = currentPosition[1] + 1;
+                    break;
+                default:
+                    break;
+            }
+
+            // check if wall
+            if (mapLayout[newRow, newCol] == "#")
+            {
+                // is wall so return false
+                return false;
+            }
+            else
+            {
+                // not a wall so return true
+                return true;
+            }
+        }
+
 
         // take the 2D map array and convert to a string
         public string convertMapToString(string[,] mapLayout)
