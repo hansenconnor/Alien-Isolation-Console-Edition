@@ -71,7 +71,7 @@ namespace TheAionProject
 
             //
             // add NPC to map
-            mapLayout[5, 5] = Universe.NPCs[0].Icon;
+            mapLayout[5, 5] = UniverseNpcs.NPCs[0].Icon;
 
             //
             // add key object to map
@@ -257,7 +257,7 @@ namespace TheAionProject
             // check if NPC
             else
             {
-                foreach (NPC npc in Universe.NPCs)
+                foreach (NPC npc in UniverseNpcs.NPCs)
                 {
                     if (npc.Icon == mapLayout[newRow, newCol])
                     {

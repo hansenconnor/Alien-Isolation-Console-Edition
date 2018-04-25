@@ -12,7 +12,7 @@ namespace TheAionProject
     public class Controller
     {
         #region FIELDS
-
+        private Universe _gameUniverse;
         private ConsoleView _gameConsoleView;
         private Traveler _gameTraveler;
         private Map _gameMap;
@@ -49,7 +49,7 @@ namespace TheAionProject
         /// </summary>
         private void InitializeGame()
         {
-           
+            _gameUniverse = new Universe();
             _gameTraveler = new Traveler();
             _gameConsoleView = new ConsoleView(_gameTraveler);
             _gameMap = new Map();
@@ -157,7 +157,7 @@ namespace TheAionProject
                     else
                     {
                         // display the NPC menu
-                        foreach (NPC npc in Universe.NPCs)
+                        foreach (NPC npc in UniverseNpcs.NPCs)
                         {
                             if (npc.Icon == _gameMap.MapLayout[nextTile[0], nextTile[1]])
                             {

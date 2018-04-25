@@ -6,21 +6,16 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
-    public class NPC : Character
+    public abstract class NPC : Character
     {
-        private bool _interactable;
-        private string _icon;
+        public abstract int Id { get; set; } 
+        public abstract string Description { get; set; }
+        public string _icon;
 
         public string Icon
         {
             get { return _icon; }
             set { _icon = value; }
-        }
-
-        public bool Interactable
-        {
-            get { return _interactable; }
-            set { _interactable = value; }
         }
     }
 }

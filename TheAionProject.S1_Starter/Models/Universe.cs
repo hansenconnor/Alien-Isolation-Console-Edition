@@ -8,42 +8,41 @@ namespace TheAionProject
 {
     public class Universe
     {
-        //#region PROPERTIES
-        //private List<MapObject> _mapObjects;
-        //#endregion
-
-
-        //#region FIELDS
-        //private List<MapObject> MapObjects
-        //{
-        //    get { return _mapObjects; }
-        //    set { _mapObjects = value; }
-        //}
-        //#endregion
+        #region ***** define all lists to be maintained by the Universe object *****
 
         //
-        // list of map objects: doors, keys, chests, etc.
-        public static List<MapObject> mapObjects = new List<MapObject>()
+        // list of all space-time locations and game objects
+        //
+      
+        private List<GameObject> _gameObjects;
+
+
+        public List<GameObject> GameObjects
         {
-            new MapObject()
-            {
-                Name = "Master Key",
-                Icon = "K",
-                Interactable = true
-            }
-        };
+            get { return _gameObjects; }
+            set { _gameObjects = value; }
+        }
+
+        #endregion
+
+        #region ***** constructor *****
 
         //
-        // list of NPCs
-        public static List<NPC> NPCs = new List<NPC>()
+        // default Universe constructor
+        //
+        public Universe()
         {
-            new NPC()
-            {
-                Name = "Test Npc",
-                Icon = "P",
-                Interactable = true
-            }
-        };
+            //
+            // add all of the universe objects to the game
+            // 
+            IntializeUniverse();
+        }
 
+        #endregion
+
+        private void IntializeUniverse()
+        {
+            _gameObjects = UniverseObjects.gameObjects;
+        }
     }
 }

@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
-    public class GameObject
+    public abstract class GameObject
     {
-        private string _name;
-
-        public string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
-
+        public abstract int Id { get; set; }
+        public abstract string Name { get; set; }
+        public abstract string Description { get; set; }
+        public abstract int SpaceTimeLocationId { get; set; }
+        public abstract string Icon { get; set; }
     }
 }
