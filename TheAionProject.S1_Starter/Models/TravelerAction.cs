@@ -25,6 +25,7 @@ namespace TheAionProject
         ListGameObjects,
         AdminMenu,
         ReturnToMainMenu,
+        TalkTo,
         ReturnToMap,
         Exit
     }

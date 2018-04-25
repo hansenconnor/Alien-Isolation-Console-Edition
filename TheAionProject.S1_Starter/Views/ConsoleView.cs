@@ -93,6 +93,32 @@ namespace TheAionProject
             DisplayStatusBox();
         }
 
+
+        // Function to display message in the 
+        public void DisplayMessage(string theMessage)
+        {
+            Console.SetCursorPosition(ConsoleLayout.InputBoxPositionLeft + 4, ConsoleLayout.InputBoxPositionTop + 2);
+            Console.ForegroundColor = ConsoleTheme.InputBoxErrorMessageForegroundColor;
+            Console.Write(theMessage);
+            Console.ForegroundColor = ConsoleTheme.InputBoxForegroundColor;
+            Console.CursorVisible = true;
+        }
+
+        public void DisplayTalkTo(NPC npc)
+        {
+            ISpeak speakingNpc = npc as ISpeak;
+
+            string message = speakingNpc.Speak();
+
+            if (message == "")
+            {
+                message = "You approach the survivor, but they have nothing to say...";
+            }
+
+            // TODO
+            DisplayGamePlayScreen("Speak to Character",message, ActionMenu.MainMenu,"");
+        }
+
         /// <summary>
         /// wait for any keystroke to continue
         /// </summary>

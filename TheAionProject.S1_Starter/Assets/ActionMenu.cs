@@ -25,6 +25,17 @@ namespace TheAionProject
         // set the initial menu as Main Menu
         public static CurrentMenu currentMenu = CurrentMenu.MapMenu;
 
+        public static Menu NpcMenu = new Menu()
+        {
+            MenuName = "NpcMenu",
+            MenuTitle = "NPC Menu",
+            MenuChoices = new Dictionary<char, TravelerAction>()
+                    {
+                        { '1', TravelerAction.TalkTo },
+                        { '2', TravelerAction.ReturnToMap }
+                    }
+        };
+
         public static Menu ItemMenu = new Menu()
         {
             MenuName = "ItemMenu",

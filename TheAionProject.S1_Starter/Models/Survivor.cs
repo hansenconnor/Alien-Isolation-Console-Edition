@@ -14,7 +14,7 @@ namespace TheAionProject
 
         public string Speak()
         {
-            if (this.Messages != null)
+            if (Messages != null)
             {
                 return GetMessage();
             }

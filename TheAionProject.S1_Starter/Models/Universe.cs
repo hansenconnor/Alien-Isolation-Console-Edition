@@ -15,7 +15,13 @@ namespace TheAionProject
         //
       
         private List<GameObject> _gameObjects;
+        private List<NPC> _npcs;
 
+        public List<NPC> Npcs
+        {
+            get { return _npcs; }
+            set { _npcs = value; }
+        }
 
         public List<GameObject> GameObjects
         {
@@ -43,6 +49,7 @@ namespace TheAionProject
         private void IntializeUniverse()
         {
             _gameObjects = UniverseObjects.gameObjects;
+            _npcs = UniverseObjects.Npcs;
         }
     }
 }

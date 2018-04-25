@@ -71,7 +71,7 @@ namespace TheAionProject
 
             //
             // add NPC to map
-            mapLayout[5, 5] = UniverseNpcs.NPCs[0].Icon;
+            mapLayout[5, 5] = "P";
 
             //
             // add key object to map
@@ -149,8 +149,11 @@ namespace TheAionProject
             oldRow = currentPosition[0]; // old row
             oldCol = currentPosition[1]; // old col
 
-            // check cell type
-            mapLayout = getCellType(mapLayout,currentPosition,keyDirection,newRow,newCol,oldRow,oldCol);
+            // update the new cell
+            mapLayout[newRow, newCol] = "@";
+
+            // update the old cell
+            mapLayout[oldRow, oldCol] = "-";
 
             return mapLayout;
         }
@@ -238,43 +241,43 @@ namespace TheAionProject
         // determine cell type and interactivity
         //
         // TODO call this method in the controller so I have access to _gameConsoleView Header text 
-        public string[,] getCellType(string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection, int newRow, int newCol, int oldRow, int oldCol)
-        {
-            // check if wall
-            if (mapLayout[newRow, newCol] == "#")
-            {
-                Console.WriteLine("That's a wall! You can't go that way!");
-            }
-            // check if empty cell
-            else if (mapLayout[newRow, newCol] == "-")
-            {
-                // update the new cell
-                mapLayout[newRow, newCol] = "@";
+        //public string[,] getCellType(string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection, int newRow, int newCol, int oldRow, int oldCol)
+        //{
+        //    // check if wall
+        //    if (mapLayout[newRow, newCol] == "#")
+        //    {
+        //        Console.WriteLine("That's a wall! You can't go that way!");
+        //    }
+        //    // check if empty cell
+        //    else if (mapLayout[newRow, newCol] == "-")
+        //    {
+        //        // update the new cell
+        //        mapLayout[newRow, newCol] = "@";
 
-                // update the old cell
-                mapLayout[oldRow, oldCol] = "-";
-            }
-            // check if NPC
-            else
-            {
-                foreach (NPC npc in UniverseNpcs.NPCs)
-                {
-                    if (npc.Icon == mapLayout[newRow, newCol])
-                    {
-                        // display NPC menu
-                        Console.WriteLine(npc.Name);
-                        // TODO: need to return the npc or dialogue to call _gameConsoleView display Message box
-                        Console.ReadLine();
-                        break;
-                    }
-                }
-            }
-            return mapLayout;
-        }
+        //        // update the old cell
+        //        mapLayout[oldRow, oldCol] = "-";
+        //    }
+        //    // check if NPC
+        //    else
+        //    {
+        //        foreach (NPC npc in _gameUniverse.)
+        //        {
+        //            if (npc.Icon == mapLayout[newRow, newCol])
+        //            {
+        //                // display NPC menu
+        //                Console.WriteLine(npc.Name);
+        //                // TODO: need to return the npc or dialogue to call _gameConsoleView display Message box
+        //                Console.ReadLine();
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return mapLayout;
+        //}
 
         public int[] getTile( string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection )
         {
-            int[] currentMapPosition = new int[2];
+            int[] newMapCoords = new int[2];
 
             int newRow = 0;
             int newCol = 0;
@@ -301,10 +304,10 @@ namespace TheAionProject
                     break;
             }
 
-            currentMapPosition[0] = newRow;
-            currentMapPosition[1] = newCol;
+            newMapCoords[0] = newRow;
+            newMapCoords[1] = newCol;
 
-            return currentMapPosition;
+            return newMapCoords;
         }
 
         public bool validateCellType( string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection )

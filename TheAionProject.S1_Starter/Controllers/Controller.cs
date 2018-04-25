@@ -136,7 +136,6 @@ namespace TheAionProject
                     // refactor update map to check if desired position is available or if there is an NPC or item etc.
                     // refactor update map to return bool 
                     //bool validTile = _gameMap.validateCellType(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
-
                     
                     // determine cell type
                     if (_gameMap.MapLayout[nextTile[0],nextTile[1]] == "#")
@@ -157,11 +156,17 @@ namespace TheAionProject
                     else
                     {
                         // display the NPC menu
-                        foreach (NPC npc in UniverseNpcs.NPCs)
+                        foreach (NPC npc in _gameUniverse.Npcs)
                         {
                             if (npc.Icon == _gameMap.MapLayout[nextTile[0], nextTile[1]])
                             {
-                                // display interaction menu for NPC
+                                if (npc is ISpeak)
+                                {                                    
+                                    _gameConsoleView.DisplayTalkTo(npc);
+                                }
+                                //ISpeak speakingNpc = npc as ISpeak;
+                                //string message = speakingNpc.Speak();
+                                //_gameConsoleView.DisplayMessage(message);
                             }
                         }
                     }

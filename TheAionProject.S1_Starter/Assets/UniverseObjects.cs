@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
-    class UniverseObjects
+    public static partial class UniverseObjects
     {
         public static List<GameObject> gameObjects = new List<GameObject>()
         {
@@ -93,6 +93,21 @@ namespace TheAionProject
                 IsConsumable = true,
                 IsVisible = true
             },
+        };
+        public static List<NPC> Npcs = new List<NPC>()
+        {
+            new Survivor()
+            {
+                Name = "Test Npc",
+                Icon = "P",
+                Messages = new List<string>
+                {
+                    "Hello!",
+                    "Greetings!",
+                    "Hello there!",
+                    "Welcome Traveler!"
+                }
+            }
         };
     }
 }
