@@ -121,6 +121,9 @@ namespace TheAionProject
                 ConsoleKeyInfo keyInfo;
                 keyInfo = Console.ReadKey(true);
 
+                // validate keys
+                // if not valid key - error message
+
                 // check for player movement key TODO -> validate and make sure player isn't in menu
                 if ((keyInfo.Key == ConsoleKey.UpArrow) || (keyInfo.Key == ConsoleKey.DownArrow) || (keyInfo.Key == ConsoleKey.LeftArrow) || (keyInfo.Key == ConsoleKey.RightArrow))
                 {
@@ -128,31 +131,20 @@ namespace TheAionProject
                     currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
 
                     // get the icon for the desired tile
-                    string nextTile = _gameMap.getTileIcon();
+                    int [] nextTile = _gameMap.getTile(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
 
                     // refactor update map to check if desired position is available or if there is an NPC or item etc.
                     // refactor update map to return bool 
-                    bool validTile = _gameMap.validateCellType(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+                    //bool validTile = _gameMap.validateCellType(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
 
-
-                    if (validTile)
+                    
+                    // determine cell type
+                    if (_gameMap.MapLayout[nextTile[0],nextTile[1]] == "#")
                     {
-                        // get tile type and determine interaction i.e. item, door, NPC, etc.
-                        // GameObject cellObject = _gameMap.getCellType(nextTile);
-
-                        // determine cell type
-                        if (nextTile.GetType() == typeof(NPC))
-                        {
-                            // display the NPC menu
-                            foreach (NPC npc in Universe.NPCs)
-                            {
-                                if (npc.Icon == nextTile)
-                                {
-
-                                }
-                            }
-                        }
-
+                        _gameConsoleView.DisplayInputErrorMessage("That's a wall! You can't go that way!");
+                    }
+                    else if (_gameMap.MapLayout[nextTile[0], nextTile[1]] == "-")
+                    {
                         // update the game map array
                         _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
 
@@ -160,14 +152,22 @@ namespace TheAionProject
                         gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
 
                         // display updated map
-                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
+                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
                     }
                     else
                     {
-
+                        // display the NPC menu
+                        foreach (NPC npc in Universe.NPCs)
+                        {
+                            if (npc.Icon == _gameMap.MapLayout[nextTile[0], nextTile[1]])
+                            {
+                                // display interaction menu for NPC
+                            }
+                        }
                     }
                 }
                 
+
                 if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MapMenu)
                 {
                     travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MapMenu, keyInfo);

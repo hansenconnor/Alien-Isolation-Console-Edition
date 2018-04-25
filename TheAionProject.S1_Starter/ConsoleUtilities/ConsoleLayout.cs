@@ -14,7 +14,7 @@ namespace TheAionProject
         //
         // console window configuration
         //
-        public static int WindowWidth = 160;
+        public static int WindowWidth = 140;
         public static int WindowHeight = 35;
         public static int WindowPositionLeft = 0;
         public static int WindowPositionTop = 0;
@@ -25,7 +25,7 @@ namespace TheAionProject
         // Note: The header height is the sum of lines of text and 2 blank lines.
         //       The top positions of other elements should be adjusted accordingly and
         //       the number of lines of text displayed by the header should not change.
-        public static int HeaderWidth = 160;
+        public static int HeaderWidth = 140;
         public static int HeaderPositionLeft = 0;
         public static int HeaderPositionTop = 0;
 
@@ -35,7 +35,7 @@ namespace TheAionProject
         // Note: The footer height is the sum of lines of text and 2 blank lines.
         //       The heights of other elements should be adjusted accordingly and
         //       the number of lines of text displayed by the footer should not change.
-        public static int FooterWidth = 160;
+        public static int FooterWidth = 140;
         public static int FooterPositionLeft = 0;
         public static int FooterPositionTop = 32;
 
@@ -44,13 +44,13 @@ namespace TheAionProject
         //
         public static int MenuBoxWidth = 37;
         public static int MenuBoxHeight = 20;
-        public static int MenuBoxPositionLeft = 122;
+        public static int MenuBoxPositionLeft = 102;
         public static int MenuBoxPositionTop = 3;
 
         //
         // message box configuration
         //
-        public static int MessageBoxWidth = 120;
+        public static int MessageBoxWidth = 100;
         public static int MessageBoxHeight = 25;
         public static int MessageBoxPositionLeft = 1;
         public static int MessageBoxPositionTop = 3;
@@ -58,7 +58,7 @@ namespace TheAionProject
         //
         // input box configuration
         //
-        public static int InputBoxWidth = 120;
+        public static int InputBoxWidth = 100;
         public static int InputBoxHeight = 4;
         public static int InputBoxPositionLeft = 1;
         public static int InputBoxPositionTop = 28;
@@ -68,7 +68,7 @@ namespace TheAionProject
         //
         public static int StatusBoxWidth = 37;
         public static int StatusBoxHeight = 9;
-        public static int StatusBoxPositionLeft = 122;
+        public static int StatusBoxPositionLeft = 102;
         public static int StatusBoxPositionTop = 23;
     }
 }

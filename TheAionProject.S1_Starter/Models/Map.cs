@@ -34,7 +34,7 @@ namespace TheAionProject
             //
 
             int rows = 20;
-            int columns = 115;
+            int columns = 50;
 
             string[,] mapLayout = new string[rows, columns];
 
@@ -270,6 +270,41 @@ namespace TheAionProject
                 }
             }
             return mapLayout;
+        }
+
+        public int[] getTile( string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection )
+        {
+            int[] currentMapPosition = new int[2];
+
+            int newRow = 0;
+            int newCol = 0;
+
+            switch (keyDirection)
+            {
+                case ConsoleKey.UpArrow:
+                    newRow = currentPosition[0] - 1;
+                    newCol = currentPosition[1];
+                    break;
+                case ConsoleKey.DownArrow:
+                    newRow = currentPosition[0] + 1;
+                    newCol = currentPosition[1];
+                    break;
+                case ConsoleKey.LeftArrow:
+                    newRow = currentPosition[0];
+                    newCol = currentPosition[1] - 1;
+                    break;
+                case ConsoleKey.RightArrow:
+                    newRow = currentPosition[0];
+                    newCol = currentPosition[1] + 1;
+                    break;
+                default:
+                    break;
+            }
+
+            currentMapPosition[0] = newRow;
+            currentMapPosition[1] = newCol;
+
+            return currentMapPosition;
         }
 
         public bool validateCellType( string[,] mapLayout, int[] currentPosition, ConsoleKey keyDirection )
