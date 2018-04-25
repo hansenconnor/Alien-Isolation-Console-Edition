@@ -161,12 +161,16 @@ namespace TheAionProject
                             if (npc.Icon == _gameMap.MapLayout[nextTile[0], nextTile[1]])
                             {
                                 if (npc is ISpeak)
-                                {                                    
+                                {
+                                    // display greeting
                                     _gameConsoleView.DisplayTalkTo(npc);
                                 }
-                                //ISpeak speakingNpc = npc as ISpeak;
-                                //string message = speakingNpc.Speak();
-                                //_gameConsoleView.DisplayMessage(message);
+                                _gameConsoleView.DisplayGamePlayScreen("NPC Menu", "Select an operation from the menu.", ActionMenu.NpcMenu, "");
+                                ActionMenu.currentMenu = ActionMenu.CurrentMenu.NPCMenu;
+                                //
+                                // call function to handle NPC interaction
+                                // npcInteraction(npc);
+                                //
                             }
                         }
                     }
@@ -181,10 +185,18 @@ namespace TheAionProject
                 {
                     travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu, keyInfo);
                 }
+                else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.NPCMenu)
+                {
+                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.NpcMenu, keyInfo);
+                }
 
                 switch (travelerActionChoice)
                 {
                     case TravelerAction.None:
+                        break;
+
+                    case TravelerAction.TalkTo:
+                        //_gameConsoleView.DisplayTalkTo(npc);
                         break;
 
                     case TravelerAction.ReturnToMap:

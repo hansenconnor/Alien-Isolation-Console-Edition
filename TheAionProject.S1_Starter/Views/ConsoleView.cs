@@ -108,7 +108,7 @@ namespace TheAionProject
         {
             ISpeak speakingNpc = npc as ISpeak;
 
-            string message = speakingNpc.Speak();
+            string message = npc.Name + ": " + speakingNpc.Speak();
 
             if (message == "")
             {
@@ -116,7 +116,9 @@ namespace TheAionProject
             }
 
             // TODO
-            DisplayGamePlayScreen("Speak to Character",message, ActionMenu.MainMenu,"");
+            DisplayGamePlayScreen("Speak to Character",message, ActionMenu.NpcMenu,"");
+            DisplayMessage("Press any key to continue...");
+            Console.ReadKey();
         }
 
         /// <summary>

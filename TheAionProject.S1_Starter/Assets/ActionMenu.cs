@@ -74,7 +74,8 @@ namespace TheAionProject
                 {
                     { '1', TravelerAction.TravelerInfo },
                     { '2', TravelerAction.ReturnToMap },
-                    { '3', TravelerAction.Exit }
+                    { '3', TravelerAction.NonplayerCharacterMenu },
+                    { '4', TravelerAction.Exit }
                 }
         };
 

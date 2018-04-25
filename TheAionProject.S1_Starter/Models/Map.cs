@@ -66,16 +66,33 @@ namespace TheAionProject
             }
 
             //
+            // TODO: Create object array that matches the dimensions of the map array
+            //
+            // Then, create function to query and update both
+
+            //
+            // populate map with walls and objects
+            //
+
+            // initial room
+            for (int i = 0; i < 6; i++)
+            {
+                mapLayout[i, 15] = "#";
+            }
+            for (int i = 0; i < 16; i++)
+            {
+                mapLayout[6, i] = "#";
+            }
+            // door to first room
+            mapLayout[3,15] = "|";
+
+            //
             // add player to map
-            mapLayout[2, 2] = "@";
+            mapLayout[2, 3] = "@";
 
             //
             // add NPC to map
-            mapLayout[5, 5] = "P";
-
-            //
-            // add key object to map
-            mapLayout[2, 5] = "K";
+            mapLayout[5, 5] = "S";
 
             return mapLayout;
         }

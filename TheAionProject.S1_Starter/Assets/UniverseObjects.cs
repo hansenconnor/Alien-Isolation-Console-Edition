@@ -98,14 +98,11 @@ namespace TheAionProject
         {
             new Survivor()
             {
-                Name = "Test Npc",
-                Icon = "P",
+                Name = "Survivor",
+                Icon = "S",
                 Messages = new List<string>
                 {
-                    "Hello!",
-                    "Greetings!",
-                    "Hello there!",
-                    "Welcome Traveler!"
+                    "...save yourself..."
                 }
             }
         };
