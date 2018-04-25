@@ -82,6 +82,7 @@ namespace TheAionProject
         // Function to redraw the map
         public void DisplayRedrawMap(string messageBoxHeaderText, string messageBoxText, Menu menu, string inputBoxPrompt)
         {
+            Console.Clear();
 
             ConsoleWindowHelper.DisplayHeader(Text.HeaderText);
             ConsoleWindowHelper.DisplayFooter(Text.FooterText);
@@ -104,16 +105,23 @@ namespace TheAionProject
         /// get a action menu choice from the user
         /// </summary>
         /// <returns>action menu choice</returns>
-        public TravelerAction GetActionMenuChoice(Menu menu)
+        public TravelerAction GetActionMenuChoice(Menu menu, ConsoleKeyInfo keyPressedInfo)
         {
             TravelerAction chosenAction = TravelerAction.None;
 
             //
             // TODO validate menu choices
             //
-            ConsoleKeyInfo keyPressedInfo = Console.ReadKey();
             char keyPressed = keyPressedInfo.KeyChar;
-            chosenAction = menu.MenuChoices[keyPressed];
+
+            if ((keyPressedInfo.Key != ConsoleKey.UpArrow) && (keyPressedInfo.Key != ConsoleKey.DownArrow) && (keyPressedInfo.Key != ConsoleKey.LeftArrow) && (keyPressedInfo.Key != ConsoleKey.RightArrow))
+            {
+                chosenAction = menu.MenuChoices[keyPressed];
+            }
+            else
+            {
+                return TravelerAction.None;
+            }    
 
             return chosenAction;
         }
@@ -469,6 +477,19 @@ namespace TheAionProject
             Console.SetCursorPosition(ConsoleLayout.InputBoxPositionLeft + 4, ConsoleLayout.InputBoxPositionTop + 2);
             Console.ForegroundColor = ConsoleTheme.InputBoxErrorMessageForegroundColor;
             Console.Write(errorMessage);
+            Console.ForegroundColor = ConsoleTheme.InputBoxForegroundColor;
+            Console.CursorVisible = true;
+        }
+
+        /// <summary>
+        /// display the error message in the input box of the game screen
+        /// </summary>
+        /// <param name="errorMessage">error message text</param>
+        public void ClearMessage()
+        {
+            Console.SetCursorPosition(ConsoleLayout.InputBoxPositionLeft + 4, ConsoleLayout.InputBoxPositionTop + 2);
+            Console.ForegroundColor = ConsoleTheme.InputBoxErrorMessageForegroundColor;
+            Console.Write("");
             Console.ForegroundColor = ConsoleTheme.InputBoxForegroundColor;
             Console.CursorVisible = true;
         }

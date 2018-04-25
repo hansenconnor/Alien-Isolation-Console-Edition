@@ -292,9 +292,18 @@ namespace TheAionProject
         }
 
         // method to process player keystrokes
-        public void handleKeyStroke(ConsoleKey keyPressed)
+        public bool validateKeyStroke(ConsoleKey keyInfo)
         {
-            // determine if player is navigating menu or map
+            // TODO check if player is in menu 
+            // TODO check a class list of valid keys
+            if ((keyInfo == ConsoleKey.UpArrow) || (keyInfo == ConsoleKey.DownArrow) || (keyInfo == ConsoleKey.LeftArrow) || (keyInfo == ConsoleKey.RightArrow))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

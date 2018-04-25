@@ -63,7 +63,7 @@ namespace TheAionProject
         /// </summary>
         private void ManageGameLoop()
         {
-            //TravelerAction travelerActionChoice = TravelerAction.None;
+            TravelerAction travelerActionChoice = TravelerAction.None;
 
             //
             // display splash screen
@@ -106,15 +106,13 @@ namespace TheAionProject
             int[] currentPlayerMapPosition = new int[2];
             currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
 
-
             //
             // print the map
             //
-            // modify this method to remove action menu and add game map with player movement functionality
-            _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MainMenu, "");
-
             //
-            // set initial menu status
+            _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MapMenu, "");
+
+            bool canMove = true;
             bool inMenu = false;
 
             //
@@ -122,23 +120,11 @@ namespace TheAionProject
             //
             while (_playingGame)
             {
-                //
                 // player controls
                 ConsoleKeyInfo keyInfo;
                 keyInfo = Console.ReadKey(true);
 
-                //
-                // validate key from list of valid keys
-                //while (!KeyStrokes.validKeyStrokes.Contains(keyInfo.Key))
-                //{
-                //    _gameConsoleView.DisplayInputErrorMessage("That's not a valid key! Please try again...");
-                //}
-                //
-                // key is valid -> handle key
-                _gameMap.handleKeyStroke(keyInfo.Key);
-
-                //
-                // move this to handleKeyStroke method inside of the Map class
+                // check for player movement key TODO -> validate and make sure player isn't in menu
                 if ((keyInfo.Key == ConsoleKey.UpArrow) || (keyInfo.Key == ConsoleKey.DownArrow) || (keyInfo.Key == ConsoleKey.LeftArrow) || (keyInfo.Key == ConsoleKey.RightArrow))
                 {
                     // get the players current position
@@ -152,6 +138,56 @@ namespace TheAionProject
 
                     // display updated map
                     _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MainMenu, "");
+                }
+                
+                if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MapMenu)
+                {
+                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MapMenu, keyInfo);
+                }
+                else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MainMenu)
+                {
+                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu, keyInfo);
+                }
+                // check if player is in a menu that prevents movement
+                else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.NPCMenu)
+                {
+                    canMove = false;
+                }
+
+                switch (travelerActionChoice)
+                {
+                    case TravelerAction.None:
+                        break;
+
+                    case TravelerAction.ReturnToMap:
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MapMenu;
+                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
+                        break;
+
+                    case TravelerAction.TravelerInfo:
+                        _gameConsoleView.DisplayTravelerInfo();
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
+                        break;
+                    //case TravelerAction.LookAround:
+                    //    _gameConsoleView.DisplayLookAround();
+                    //    break;
+
+                    case TravelerAction.AdminMenu:
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
+                        _gameConsoleView.DisplayGamePlayScreen("Admin Menu", "Select an operation from the menu.", ActionMenu.AdminMenu, "");
+                        break;
+
+                    case TravelerAction.ReturnToMainMenu:
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
+                        _gameConsoleView.DisplayGamePlayScreen("Current Location", "Main Menu", ActionMenu.MainMenu, "");
+                        break;
+
+                    case TravelerAction.Exit:
+                        _playingGame = false;
+                        break;
+
+                    default:
+                        break;
                 }
             }
 

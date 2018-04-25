@@ -16,11 +16,14 @@ namespace TheAionProject
             MissionIntro,
             InitializeMission,
             MainMenu,
+            NPCMenu,
+            MapMenu,
             AdminMenu,
             ItemMenu
         }
 
-        public static CurrentMenu currentMenu = CurrentMenu.MainMenu;
+        // set the initial menu as Main Menu
+        public static CurrentMenu currentMenu = CurrentMenu.MapMenu;
 
         public static Menu ItemMenu = new Menu()
         {
@@ -59,7 +62,31 @@ namespace TheAionProject
             MenuChoices = new Dictionary<char, TravelerAction>()
                 {
                     { '1', TravelerAction.TravelerInfo },
+                    { '2', TravelerAction.ReturnToMap },
+                    { '3', TravelerAction.Exit }
+                }
+        };
+
+        public static Menu MapMenu = new Menu()
+        {
+            MenuName = "MapMenu",
+            MenuTitle = "Map Menu",
+            MenuChoices = new Dictionary<char, TravelerAction>()
+                {
+                    { '1', TravelerAction.TravelerInfo },
                     { '2', TravelerAction.Exit }
+                }
+        };
+
+        public static Menu AdminMenu = new Menu()
+        {
+            MenuName = "AdminMenu",
+            MenuTitle = "Admin Menu",
+            MenuChoices = new Dictionary<char, TravelerAction>()
+                {
+                    { '1', TravelerAction.ListSpaceTimeLocations },
+                    { '2', TravelerAction.ListGameObjects},
+                    { '0', TravelerAction.ReturnToMainMenu }
                 }
         };
     }
