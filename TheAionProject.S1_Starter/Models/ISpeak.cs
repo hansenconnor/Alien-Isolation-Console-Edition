@@ -10,6 +10,5 @@ namespace TheAionProject
     {
         List<string> Messages { get; set; }
         string Speak();
- 
     }
 }

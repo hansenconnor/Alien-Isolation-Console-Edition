@@ -13,6 +13,7 @@ namespace TheAionProject
             new TravelerObject
             {
                 Id = 1,
+                Icon = "G",
                 Name = "Bag of Gold",
                 SpaceTimeLocationId = 2,
                 Description = "A small leather pouch filled with 9 gold coins.",

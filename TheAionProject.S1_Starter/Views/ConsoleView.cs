@@ -28,6 +28,8 @@ namespace TheAionProject
         // declare game objects for the ConsoleView object to use
         //
         Traveler _gameTraveler;
+        Universe _gameUniverse;
+        Map _gameMap;
 
         ViewStatus _viewStatus;
 
@@ -42,9 +44,11 @@ namespace TheAionProject
         /// <summary>
         /// default constructor to create the console view objects
         /// </summary>
-        public ConsoleView(Traveler gameTraveler)
+        public ConsoleView(Traveler gameTraveler, Universe gameUniverse, Map gameMap)
         {
             _gameTraveler = gameTraveler;
+            _gameUniverse = gameUniverse;
+            _gameMap = gameMap;
 
             _viewStatus = ViewStatus.TravelerInitialization;
 
@@ -108,7 +112,7 @@ namespace TheAionProject
         {
             ISpeak speakingNpc = npc as ISpeak;
 
-            string message = npc.Name + ": " + speakingNpc.Speak();
+            string message = npc.Name + ": \"" + speakingNpc.Speak() + "\"";
 
             if (message == "")
             {
@@ -120,6 +124,41 @@ namespace TheAionProject
             DisplayMessage("Press any key to continue...");
             Console.ReadKey();
         }
+
+        public void DisplayLookAround(string[,] map)
+        {
+            // get player position
+            int[] location = new int[2];
+            location = _gameMap.getCurrentPosition(map);
+
+            // define map search parameters
+            int firstRow = location[0] - 1;
+            int lastRow = location[0] + 2;
+
+            int firstCol = location[1] - 1;
+            int lastCol = location[1] + 2;
+            
+            //
+            // check the map tiles around the player
+            //
+            // row above player to row below player
+            for (int r = firstRow; r < lastRow; r++)
+            {
+                // col left of player to col right of player
+                for (int c = firstCol; c < lastCol; c++)
+                {
+                    foreach (GameObject gameObject in _gameUniverse.GameObjects)
+                    {
+                        if (gameObject.Icon == _gameMap.MapLayout[r,c])
+                        {
+                            Console.WriteLine(gameObject.Name);
+                        }
+                    }
+                }
+            }
+            //DisplayGamePlayScreen("Current Location", messageBoxText, ActionMenu.MainMenu, "");
+        }
+
 
         /// <summary>
         /// wait for any keystroke to continue

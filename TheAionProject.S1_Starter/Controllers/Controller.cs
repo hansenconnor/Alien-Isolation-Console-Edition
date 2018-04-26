@@ -49,10 +49,12 @@ namespace TheAionProject
         /// </summary>
         private void InitializeGame()
         {
-            _gameUniverse = new Universe();
             _gameTraveler = new Traveler();
-            _gameConsoleView = new ConsoleView(_gameTraveler);
+            _gameUniverse = new Universe();
             _gameMap = new Map();
+
+            _gameConsoleView = new ConsoleView(_gameTraveler, _gameUniverse, _gameMap);
+            
             _playingGame = true;
 
             //
@@ -180,7 +182,7 @@ namespace TheAionProject
                                     // check if the key unlocks id matches the door id
                                     if ((entry.Key[0] == doorCoords[0]) && (entry.Key[1] == doorCoords[1]))
                                     {
-                                        Console.WriteLine("asdf asd aSD");
+                                        //Console.WriteLine("asdf asd aSD");
                                         // player has key to open door
 
                                         _gameMap.MapLayout[nextTile[0], nextTile[1]] = "@";
@@ -193,8 +195,9 @@ namespace TheAionProject
 
                                         _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
                                     }
+                                    else { _gameConsoleView.DisplayInputErrorMessage("You don't have a key that unlocks this door!"); };
                                 }
-                            }
+                            }else { _gameConsoleView.DisplayInputErrorMessage("You need a key to unlock this door!"); }
                             //command.Parameters.AddWithValue(kvp.Key, kvp.Value);
                         }
                     else
@@ -252,9 +255,11 @@ namespace TheAionProject
                         _gameConsoleView.DisplayTravelerInfo();
                         ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
                         break;
-                    //case TravelerAction.LookAround:
-                    //    _gameConsoleView.DisplayLookAround();
-                    //    break;
+
+                    case TravelerAction.LookAround:
+                        _gameConsoleView.DisplayLookAround(_gameMap.MapLayout);
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
+                        break;
 
                     case TravelerAction.AdminMenu:
                         ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;

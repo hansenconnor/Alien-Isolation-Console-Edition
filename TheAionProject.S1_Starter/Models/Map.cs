@@ -90,6 +90,9 @@ namespace TheAionProject
             // add player to map
             mapLayout[2, 3] = "@";
 
+            // add bag of gold to map to test
+            mapLayout[2, 4] = "G";
+
             //
             // add NPC to map
             mapLayout[5, 5] = "S";

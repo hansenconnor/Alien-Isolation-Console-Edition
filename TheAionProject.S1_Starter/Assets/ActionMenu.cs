@@ -95,7 +95,8 @@ namespace TheAionProject
                 {
                     { '1', TravelerAction.TravelerInfo },
                     { '2', TravelerAction.Inventory },
-                    { '3', TravelerAction.Exit }
+                    { '3', TravelerAction.LookAround },
+                    { '4', TravelerAction.Exit }
                 }
         };
 
