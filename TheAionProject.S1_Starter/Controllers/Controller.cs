@@ -173,37 +173,26 @@ namespace TheAionProject
                             // check if object is key
                             if (travelerObject.Type == TravelerObjectType.Key)
                             {
-                                // get the id of the object which the key can be used to unlock
-                                int found;
-
-
+                                // get the id of the object which the key can be used to 
                                 foreach (KeyValuePair<int[], int> entry in _gameMap.objectCoordinates)
                                 {
-                                    // do something with entry.Value or entry.Key
+                                    // 
+                                    // check if the key unlocks id matches the door id
                                     if ((entry.Key[0] == doorCoords[0]) && (entry.Key[1] == doorCoords[1]))
                                     {
-                                        Console.WriteLine("huzzah");
+                                        Console.WriteLine("asdf asd aSD");
+                                        // player has key to open door
+
+                                        _gameMap.MapLayout[nextTile[0], nextTile[1]] = "@";
+
+                                        // update the game map array
+                                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+
+                                        // update the game map string
+                                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+
+                                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
                                     }
-                                }
-
-
-                                //
-                                // check if the key unlockes matches the door
-                                if (_gameMap.objectCoordinates.TryGetValue(doorCoords, out found) && found == travelerObject.UnlocksId)
-                                {
-                                    Console.WriteLine("asdf asd aSD");
-                                    // player has key to open door
-                                    currentPlayerMapPosition[0] = nextTile[0];
-                                    currentPlayerMapPosition[1] = nextTile[1];
-
-                                    // update the game map array
-                                    _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
-
-                                    // update the game map string
-                                    gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
-
-                                    //_gameMap.MapLayout[nextTile[0],nextTile[1]] = "@";
-                                    _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
                                 }
                             }
                             //command.Parameters.AddWithValue(kvp.Key, kvp.Value);
