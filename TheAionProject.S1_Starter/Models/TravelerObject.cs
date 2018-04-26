@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
-    class TravelerObject : GameObject
+    public class TravelerObject : GameObject
     {
         public override int Id { get; set; }
         public override string Name { get; set; }
@@ -18,5 +18,6 @@ namespace TheAionProject
         public bool IsConsumable { get; set; }
         public bool IsVisible { get; set; }
         public int Value { get; set; }
+        public int UnlocksId { get; set; }
     }
 }

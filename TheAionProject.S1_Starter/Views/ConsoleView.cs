@@ -603,6 +603,11 @@ namespace TheAionProject
             return traveler;
         }
 
+        public void DisplayInventory()
+        {
+            DisplayGamePlayScreen("Current Inventory", Text.CurrentInventory(_gameTraveler.Inventory), ActionMenu.MainMenu, "");
+        }
+
         #region ----- display responses to menu action choices -----
 
         public void DisplayTravelerInfo()

@@ -74,8 +74,16 @@ namespace TheAionProject
                 {
                     { '1', TravelerAction.TravelerInfo },
                     { '2', TravelerAction.ReturnToMap },
-                    { '3', TravelerAction.NonplayerCharacterMenu },
-                    { '4', TravelerAction.Exit }
+                    { '3', TravelerAction.Inventory },
+                    { '4', TravelerAction.Exit },
+                    
+                    //{ '2', TravelerAction.LookAround },
+                    //{ '3', TravelerAction.LookAt },
+                    //{ '4', TravelerAction.PickUp },
+                    //{ '5', TravelerAction.PutDown },
+                    //{ '7', TravelerAction.Travel },
+                    //{ '8', TravelerAction.TravelerLocationsVisited },
+                    //{ '9', TravelerAction.AdminMenu }
                 }
         };
 
@@ -86,7 +94,8 @@ namespace TheAionProject
             MenuChoices = new Dictionary<char, TravelerAction>()
                 {
                     { '1', TravelerAction.TravelerInfo },
-                    { '2', TravelerAction.Exit }
+                    { '2', TravelerAction.Inventory },
+                    { '3', TravelerAction.Exit }
                 }
         };
 

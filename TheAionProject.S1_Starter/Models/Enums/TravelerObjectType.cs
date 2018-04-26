@@ -12,6 +12,7 @@ namespace TheAionProject
         Medicine,
         Weapon,
         Treasure,
-        Information
+        Information,
+        Key
     }
 }

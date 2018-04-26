@@ -27,6 +27,7 @@ namespace TheAionProject
         private string _homePlanet;
         private CompanionName _travelerCompanionName;
         private bool _earthBorn;
+        private List<TravelerObject> _inventory;
         #endregion
 
 
@@ -49,6 +50,12 @@ namespace TheAionProject
             set { _travelerCompanionName = value; }
         }
 
+        public List<TravelerObject> Inventory
+        {
+            get { return _inventory; }
+            set { _inventory = value; }
+        }
+
 
         #endregion
 
@@ -57,12 +64,12 @@ namespace TheAionProject
 
         public Traveler()
         {
-
+            _inventory = new List<TravelerObject>();
         }
 
         public Traveler(string name, RaceType race, int spaceTimeLocationID) : base(name, race, spaceTimeLocationID)
         {
-
+            _inventory = new List<TravelerObject>();
         }
 
         #endregion

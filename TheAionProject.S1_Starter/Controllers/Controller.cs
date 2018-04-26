@@ -55,6 +55,13 @@ namespace TheAionProject
             _gameMap = new Map();
             _playingGame = true;
 
+            //
+            // add initial items to the traveler's inventory
+            //
+            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(8) as TravelerObject);
+            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(9) as TravelerObject);
+            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(10) as TravelerObject);
+
             Console.CursorVisible = false;
         }
 
@@ -81,6 +88,7 @@ namespace TheAionProject
             //
             // display introductory message
             //
+
             _gameConsoleView.DisplayGamePlayScreen("Mission Intro", Text.MissionIntro(), ActionMenu.MissionIntro, "");
             _gameConsoleView.GetContinueKey();
 
@@ -137,7 +145,9 @@ namespace TheAionProject
                     // refactor update map to return bool 
                     //bool validTile = _gameMap.validateCellType(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
                     
-                    // determine cell type
+                    //
+                    // determine object in cell type
+                    //
                     if (_gameMap.MapLayout[nextTile[0],nextTile[1]] == "#")
                     {
                         _gameConsoleView.DisplayInputErrorMessage("That's a wall! You can't go that way!");
@@ -153,6 +163,51 @@ namespace TheAionProject
                         // display updated map
                         _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
                     }
+                    else if (_gameMap.MapLayout[nextTile[0], nextTile[1]] == "|")
+                    {
+                        int[] doorCoords = new int[2];
+                        doorCoords[0] = nextTile[0];
+                        doorCoords[1] = nextTile[1];
+
+                        foreach (TravelerObject travelerObject in _gameTraveler.Inventory)
+                            // check if object is key
+                            if (travelerObject.Type == TravelerObjectType.Key)
+                            {
+                                // get the id of the object which the key can be used to unlock
+                                int found;
+
+
+                                foreach (KeyValuePair<int[], int> entry in _gameMap.objectCoordinates)
+                                {
+                                    // do something with entry.Value or entry.Key
+                                    if ((entry.Key[0] == doorCoords[0]) && (entry.Key[1] == doorCoords[1]))
+                                    {
+                                        Console.WriteLine("huzzah");
+                                    }
+                                }
+
+
+                                //
+                                // check if the key unlockes matches the door
+                                if (_gameMap.objectCoordinates.TryGetValue(doorCoords, out found) && found == travelerObject.UnlocksId)
+                                {
+                                    Console.WriteLine("asdf asd aSD");
+                                    // player has key to open door
+                                    currentPlayerMapPosition[0] = nextTile[0];
+                                    currentPlayerMapPosition[1] = nextTile[1];
+
+                                    // update the game map array
+                                    _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+
+                                    // update the game map string
+                                    gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+
+                                    //_gameMap.MapLayout[nextTile[0],nextTile[1]] = "@";
+                                    _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
+                                }
+                            }
+                            //command.Parameters.AddWithValue(kvp.Key, kvp.Value);
+                        }
                     else
                     {
                         // display the NPC menu
@@ -220,6 +275,11 @@ namespace TheAionProject
                     case TravelerAction.ReturnToMainMenu:
                         ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
                         _gameConsoleView.DisplayGamePlayScreen("Current Location", "Main Menu", ActionMenu.MainMenu, "");
+                        break;
+
+                    case TravelerAction.Inventory:
+                        _gameConsoleView.DisplayInventory();
+                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
                         break;
 
                     case TravelerAction.Exit:

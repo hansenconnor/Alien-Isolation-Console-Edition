@@ -93,6 +93,20 @@ namespace TheAionProject
                 IsConsumable = true,
                 IsVisible = true
             },
+
+            new TravelerObject
+            {
+                Id = 10,
+                Name = "Key to the first door",
+                Description =
+                    "A key to open the first door.",
+                Type = TravelerObjectType.Key,
+                Value = 0,
+                UnlocksId = 1,
+                CanInventory = true,
+                IsConsumable = false,
+                IsVisible = true
+            },
         };
         public static List<NPC> Npcs = new List<NPC>()
         {

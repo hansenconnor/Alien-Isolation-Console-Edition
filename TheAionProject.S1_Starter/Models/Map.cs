@@ -97,6 +97,13 @@ namespace TheAionProject
             return mapLayout;
         }
 
+        // define dictionary to hold row/col pairs for objects like keys, doors, buttons, etc.
+        public Dictionary<int[], int> objectCoordinates = new Dictionary<int[], int>()
+        {
+            // door 1
+            { new int[] { 3,15}, 1 },
+        };
+
         // possibly update method to return pair of ints ( xCoor,yCoord ) instead of array of length 2
         public int[] getCurrentPosition(string[,] mapLayout)
         {
