@@ -8,6 +8,16 @@ namespace TheAionProject
 {
     public static partial class UniverseObjects
     {
+        public static List<MapObject> mapObjects = new List<MapObject>()
+        {
+            new MapObject
+            {
+                Name = "The First Door",
+                Coords = new int [2] { 3, 10 },
+                Type = MapObjectType.Door
+            },
+        };
+
         public static List<MapLocation> mapLocations = new List<MapLocation>()
         {
             new MapLocation
@@ -27,14 +37,6 @@ namespace TheAionProject
 
         public static List<GameObject> gameObjects = new List<GameObject>()
         {
-            new MapObject
-            {
-                Name = "The First Door",
-                RoomId = 1,
-                Coords = new int [2] { 3, 10 },
-                Type = MapObjectType.Door
-            },
-
             new TravelerObject
             {
                 Id = 1,

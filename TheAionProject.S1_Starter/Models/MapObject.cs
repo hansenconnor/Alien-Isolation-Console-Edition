@@ -6,30 +6,46 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
-    public class MapObject : GameObject
+    public class MapObject
     {
-        public override int Id { get; set; }
-        public override string Name { get; set; }
-        public override string Description { get; set; }
-        public override int RoomId { get; set; }
-        public override string Icon { get; set; }
-
+        public int _id;
+        public string _name;
+        public string _description;
+        public string _icon;
+        private int[] _coords;
         private MapObjectType _type;
 
-        public MapObjectType Type
+
+        public int Id
         {
-            get { return _type; }
-            set { _type = value; }
+            get { return _id; }
+            set { _id = value; }
         }
-
-
-        private int[] _coords;
-
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
+        public string Icon
+        {
+            get { return _icon; }
+            set { _icon = value; }
+        }
         public int[] Coords
         {
             get { return _coords; }
             set { _coords = value; }
         }
 
+        public MapObjectType Type
+        {
+            get { return _type; }
+            set { _type = value; }
+        }
     }
 }

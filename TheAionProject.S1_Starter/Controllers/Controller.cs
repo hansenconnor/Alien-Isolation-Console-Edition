@@ -175,6 +175,7 @@ namespace TheAionProject
                             // check if object is key
                             if (travelerObject.Type == TravelerObjectType.Key)
                             {
+                                // TODO -> use mapObjects list in UniverseObjects.cs instead
                                 // get the id of the object which the key can be used to 
                                 foreach (KeyValuePair<int[], int> entry in _gameMap.objectCoordinates)
                                 {

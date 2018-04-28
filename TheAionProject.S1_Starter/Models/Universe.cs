@@ -91,7 +91,7 @@ namespace TheAionProject
         {
             _gameObjects = UniverseObjects.gameObjects;
             _npcs = UniverseObjects.Npcs;
-            _mapLocations = UniverseObjects.MapLocations;
+            _mapLocations = UniverseObjects.mapLocations;
         }
         #endregion
     }
