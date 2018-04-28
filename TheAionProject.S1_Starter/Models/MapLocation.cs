@@ -11,8 +11,13 @@ namespace TheAionProject
         private string _name;
         private string _description;
         private LocationBounds _bounds;
-    
+        private int _id;
 
+        public int ID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
         public string Name
         {
             get { return _name; }

@@ -13,9 +13,16 @@ namespace TheAionProject
         //
         // list of all space-time locations and game objects
         //
-      
+
         private List<GameObject> _gameObjects;
         private List<NPC> _npcs;
+        private List<MapLocation> _mapLocations;
+        
+        public List<MapLocation> MapLocations
+        {
+            get { return _mapLocations; }
+            set { _mapLocations = value; }
+        }
 
         public List<NPC> Npcs
         {
@@ -84,6 +91,7 @@ namespace TheAionProject
         {
             _gameObjects = UniverseObjects.gameObjects;
             _npcs = UniverseObjects.Npcs;
+            _mapLocations = UniverseObjects.MapLocations;
         }
         #endregion
     }

@@ -12,18 +12,29 @@ namespace TheAionProject
         {
             new MapLocation
             {
+                ID = 1,
                 Name = "The First Room",
                 Bounds = new MapLocation.LocationBounds(1,1,6,15)
             },
             new MapLocation
             {
+                ID = 2,
                 Name = "The Second Room",
                 Bounds = new MapLocation.LocationBounds(1,16,6,32)
             }
+            // TODO add 4 more map locations
         };
 
         public static List<GameObject> gameObjects = new List<GameObject>()
         {
+            new MapObject
+            {
+                Name = "The First Door",
+                RoomId = 1,
+                Coords = new int [2] { 3, 10 },
+                Type = MapObjectType.Door
+            },
+
             new TravelerObject
             {
                 Id = 1,
@@ -123,6 +134,7 @@ namespace TheAionProject
                 IsVisible = true
             },
         };
+
         public static List<NPC> Npcs = new List<NPC>()
         {
             new Survivor()
