@@ -29,75 +29,93 @@ namespace TheAionProject
         public string[,] drawMap()
         {
 
+            // get rows from text file
+            // var rows = File.ReadLines(@"C:\Users\connor\Desktop\Alien-Isolation-Console-Edition\TheAionProject.S1_Starter\Models\mapLayout.txt").Count();
+
+            string[,] item = new string[13, 52];
+
+            string[] lines = File.ReadAllLines(@"C:\Users\connor\Desktop\Alien-Isolation-Console-Edition\TheAionProject.S1_Starter\Models\mapLayout.txt");
+            char ch = lines[1][1]; //second line's second char
+
+            for (int r = 0; r < 13; r++)
+            {
+                for (int c = 0; c < 52; c++)
+                {
+                    item[r,c] = lines[r][c].ToString();
+                    //Console.WriteLine(i + " " + j + "=" + item[i, j]);
+                }
+            }
+
+            return item;
             //
             // TODO update array to hold map objects
             //
 
-            int rows = 20;
-            int columns = 50;
+            //int rows = 20;
+            //int columns = 50;
 
-            string[,] mapLayout = new string[rows, columns];
+            //string[,] mapLayout = new string[rows, columns];
 
-            for (int i = 1; i != rows - 1; i++)
-            {
-                // not first or last row so set first and last col of each row to be a wall
-                mapLayout[i, 0] = "#";
-                mapLayout[i, columns - 1] = "#";
-            }
+            //for (int i = 1; i != rows - 1; i++)
+            //{
+            //    // not first or last row so set first and last col of each row to be a wall
+            //    mapLayout[i, 0] = "#";
+            //    mapLayout[i, columns - 1] = "#";
+            //}
 
-            for (int i = 0; i != rows; i++)
-            {
-                if ((i == 0) || (i == rows - 1))
-                {
-                    // first or last row so only draw walls
-                    for (int j = 0; j < columns; j++)
-                    {
-                        mapLayout[i, j] = "#";
-                    }
-                }
-                else
-                {
-                    // not first or last row so draw cells between first and last col
-                    for (int j = 1; j < columns - 1; j++)
-                    {
-                        mapLayout[i, j] = "-";
-                    }
-                }
-            }
+            //for (int i = 0; i != rows; i++)
+            //{
+            //    if ((i == 0) || (i == rows - 1))
+            //    {
+            //        // first or last row so only draw walls
+            //        for (int j = 0; j < columns; j++)
+            //        {
+            //            mapLayout[i, j] = "#";
+            //        }
+            //    }
+            //    else
+            //    {
+            //        // not first or last row so draw cells between first and last col
+            //        for (int j = 1; j < columns - 1; j++)
+            //        {
+            //            mapLayout[i, j] = "-";
+            //        }
+            //    }
+            //}
 
-            //
-            // TODO: Create object array that matches the dimensions of the map array
-            //
-            // Then, create function to query and update both
+            ////
+            //// TODO: Create object array that matches the dimensions of the map array
+            ////
+            //// Then, create function to query and update both
 
-            //
-            // populate map with walls and objects
-            //
+            ////
+            //// populate map with walls and objects
+            ////
 
-            // initial room
-            for (int i = 0; i < 6; i++)
-            {
-                mapLayout[i, 15] = "#";
-            }
-            for (int i = 0; i < 16; i++)
-            {
-                mapLayout[6, i] = "#";
-            }
-            // door to first room
-            mapLayout[3,15] = "|";
+            //// initial room
+            //for (int i = 0; i < 6; i++)
+            //{
+            //    mapLayout[i, 15] = "#";
+            //}
+            //for (int i = 0; i < 16; i++)
+            //{
+            //    mapLayout[6, i] = "#";
+            //}
+            //// door to first room
+            //mapLayout[3,15] = "|";
 
-            //
-            // add player to map
-            mapLayout[2, 3] = "@";
+            ////
+            //// add player to map
+            //mapLayout[2, 3] = "@";
 
-            // add bag of gold to map to test
-            mapLayout[2, 4] = "G";
+            //// add bag of gold to map to test
+            //mapLayout[2, 4] = "G";
 
-            //
-            // add NPC to map
-            mapLayout[5, 5] = "S";
+            ////
+            //// add NPC to map
+            //mapLayout[5, 5] = "S";
 
-            return mapLayout;
+            //return mapLayout;
         }
 
         // define dictionary to hold row/col pairs for objects like keys, doors, buttons, etc.
