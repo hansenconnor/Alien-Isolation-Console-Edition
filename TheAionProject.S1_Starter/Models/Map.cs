@@ -129,6 +129,33 @@ namespace TheAionProject
             return currentMapPosition;
         }
 
+        // get the room the player occupies
+        public MapLocation getCurrentRoom(int[] playerCoords)
+        {
+            MapLocation currentRoom = UniverseObjects.mapLocations[0];
+
+            foreach (MapLocation room in UniverseObjects.mapLocations)
+            {
+                int startRow = room.Bounds.nwRow;
+                int endRow = room.Bounds.seRow;
+
+                int startCol = room.Bounds.nwCol;
+                int endCol = room.Bounds.seCol;
+
+                for (int r = startRow; r < endRow; r++)
+                {
+                    for (int c = startCol; c < endCol; c++)
+                    {
+                        if (playerCoords[0] == r && playerCoords[1] == c)
+                        {
+                            currentRoom = room;
+                        }
+                    }
+                }
+            }
+            return currentRoom;
+        }
+
         // take the current player position and redraw the map
         // update this method to take key as parameter ( up, down, left, right )
         // then determine new coords

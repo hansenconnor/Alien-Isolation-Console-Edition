@@ -8,6 +8,20 @@ namespace TheAionProject
 {
     public static partial class UniverseObjects
     {
+        public static List<MapLocation> mapLocations = new List<MapLocation>()
+        {
+            new MapLocation
+            {
+                Name = "The First Room",
+                Bounds = new MapLocation.LocationBounds(1,1,6,15)
+            },
+            new MapLocation
+            {
+                Name = "The Second Room",
+                Bounds = new MapLocation.LocationBounds(1,16,6,32)
+            }
+        };
+
         public static List<GameObject> gameObjects = new List<GameObject>()
         {
             new TravelerObject

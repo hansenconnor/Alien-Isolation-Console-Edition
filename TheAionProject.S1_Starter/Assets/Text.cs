@@ -196,6 +196,16 @@ namespace TheAionProject
             return statusBoxText;
         }
 
+        public static string LookAround(MapLocation currentRoom)
+        {
+            string messageBoxText =
+                $"Current Location: {currentRoom.Name}\n" +
+                " \n" +
+                currentRoom.Description;
+
+            return messageBoxText;
+        }
+
         public static string CurrentInventory(IEnumerable<TravelerObject> inventory)
         {
             string messageBoxText = "";

@@ -128,15 +128,19 @@ namespace TheAionProject
         public void DisplayLookAround(string[,] map)
         {
             // get player position
-            int[] location = new int[2];
-            location = _gameMap.getCurrentPosition(map);
+            int[] playerCoords = new int[2];
+            playerCoords = _gameMap.getCurrentPosition(map);
+
+            // get the current room
+            MapLocation currentMapRoom = _gameMap.getCurrentRoom(playerCoords);
+            Console.WriteLine(currentMapRoom.Name);
 
             // define map search parameters
-            int firstRow = location[0] - 1;
-            int lastRow = location[0] + 2;
+            int firstRow = playerCoords[0] - 1;
+            int lastRow = playerCoords[0] + 2;
 
-            int firstCol = location[1] - 1;
-            int lastCol = location[1] + 2;
+            int firstCol = playerCoords[1] - 1;
+            int lastCol = playerCoords[1] + 2;
             
             //
             // check the map tiles around the player
@@ -156,7 +160,10 @@ namespace TheAionProject
                     }
                 }
             }
-            //DisplayGamePlayScreen("Current Location", messageBoxText, ActionMenu.MainMenu, "");
+
+            // display name and description of location as well as items nearby
+            string messageBoxText = Text.LookAround(currentMapRoom) + Environment.NewLine + Environment.NewLine;
+            DisplayGamePlayScreen("Current Location", messageBoxText, ActionMenu.MainMenu, "");
         }
 
 

@@ -86,7 +86,5 @@ namespace TheAionProject
             _npcs = UniverseObjects.Npcs;
         }
         #endregion
-
-
     }
 }
