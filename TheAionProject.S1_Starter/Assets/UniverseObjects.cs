@@ -41,6 +41,7 @@ namespace TheAionProject
             {
                 Id = 1,
                 Coords = new int[2] { 2, 2 },
+                Icon = "K",
                 Name = "Key to the first door",
                 Description =
                     "A key to open the first door.",

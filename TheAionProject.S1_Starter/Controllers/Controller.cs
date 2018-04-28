@@ -60,9 +60,7 @@ namespace TheAionProject
             //
             // add initial items to the traveler's inventory
             //
-            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(8) as TravelerObject);
-            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(9) as TravelerObject);
-            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(10) as TravelerObject);
+            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(1) as TravelerObject);
 
             Console.CursorVisible = false;
         }
