@@ -1,0 +1,1 @@
+On load, iterate through game objects and populate map with the respective icon based on gameObject coordinates.

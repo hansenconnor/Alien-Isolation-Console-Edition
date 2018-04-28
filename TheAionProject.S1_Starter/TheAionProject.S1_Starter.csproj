@@ -52,11 +52,13 @@
     <Compile Include="ConsoleUtilities\ConsoleWindowHelper.cs" />
     <Compile Include="Controllers\Controller.cs" />
     <Compile Include="Models\Character.cs" />
+    <Compile Include="Models\Enums\MapObjectType.cs" />
     <Compile Include="Models\Enums\TravelerObjectType.cs" />
     <Compile Include="Models\GameObject.cs" />
     <Compile Include="Models\ISpeak.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\MapLocation.cs" />
+    <Compile Include="Models\MapObject.cs" />
     <Compile Include="Models\Menu.cs" />
     <Compile Include="Models\NPC.cs" />
     <Compile Include="Models\Survivor.cs" />

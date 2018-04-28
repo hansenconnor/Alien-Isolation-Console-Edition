@@ -12,6 +12,7 @@ namespace TheAionProject
         public abstract string Name { get; set; }
         public abstract string Description { get; set; }
         public abstract int RoomId { get; set; }
+        public abstract int[] Coords { get; set; }
         public abstract string Icon { get; set; }
     }
 }
