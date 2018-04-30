@@ -135,6 +135,33 @@ namespace TheAionProject
             Console.ReadKey();
         }
 
+        public void DisplayGameObjectInfo(GameObject gameObject, int[] playerPosition, string[,] map)
+        {
+            DisplayGamePlayScreen("Item", Text.LookAt(gameObject), ActionMenu.MainMenu, "");
+
+            //
+            // future change here -> add item menu and check if player wants to add to inventory or not
+            //
+            if (gameObject is TravelerObject)
+            {
+                TravelerObject travelerObject = gameObject as TravelerObject;
+                if (travelerObject.CanInventory == true)
+                {
+                    _gameTraveler.Inventory.Add(travelerObject);
+
+                    map[playerPosition[0], playerPosition[1]] = "-";
+
+                    travelerObject.CanInventory = false;
+                }
+                else
+                {
+
+                }
+            }
+
+            DisplayMessage("Press any key to continue...");
+        }
+
         public void DisplayItemReceived(NPC npc)
         {
             string message;

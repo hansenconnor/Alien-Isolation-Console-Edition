@@ -64,17 +64,19 @@ namespace TheAionProject
         {
             new TravelerObject
             {
-                Id = 2,
-                Icon = "G",
-                Name = "Bag of Gold",
-                RoomId = 2,
-                Description = "A small leather pouch filled with 9 gold coins.",
-                Type = TravelerObjectType.Treasure,
-                Value = 45,
+                Id = 3,
+                Coords = new int[2] { 1, 2 },
+                Icon = "K",
+                Name = "Test key",
+                Description =
+                    "A test key",
+                Type = TravelerObjectType.Key,
+                Value = 0,
+                UnlocksId = 1,
                 CanInventory = true,
-                IsConsumable = true,
+                IsConsumable = false,
                 IsVisible = true
-            },
+            }
         };
 
         public static List<NPC> Npcs = new List<NPC>()

@@ -176,11 +176,11 @@ namespace TheAionProject
                     // refactor update map to check if desired position is available or if there is an NPC or item etc.
                     // refactor update map to return bool 
                     //bool validTile = _gameMap.validateCellType(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
-                    
+
                     //
                     // determine object in cell type
                     //
-                    if (_gameMap.MapLayout[nextTile[0],nextTile[1]] == "#")
+                    if (_gameMap.MapLayout[nextTile[0], nextTile[1]] == "#")
                     {
                         _gameConsoleView.DisplayInputErrorMessage("That's a wall! You can't go that way!");
                     }
@@ -238,9 +238,29 @@ namespace TheAionProject
                                         else { _gameConsoleView.DisplayInputErrorMessage("You don't have a key that unlocks this door!"); };
                                     }
                                 }
-                            }else { _gameConsoleView.DisplayInputErrorMessage("You need a key to unlock this door!"); }
-                            //command.Parameters.AddWithValue(kvp.Key, kvp.Value);
+                            }
+                            else { _gameConsoleView.DisplayInputErrorMessage("You need a key to unlock this door!"); }
+                        //command.Parameters.AddWithValue(kvp.Key, kvp.Value);
+                    }
+                    else if (_gameMap.MapLayout[nextTile[0], nextTile[1]] == "K")
+                    {
+                        int[] keyCoords = new int[2];
+                        keyCoords[0] = nextTile[0];
+                        keyCoords[1] = nextTile[1];
+                        foreach (TravelerObject key in UniverseObjects.gameObjects)
+                        {
+                            if (key.Coords != null)
+                            {
+                                if ((key.Coords[0] == keyCoords[0]) && (key.Coords[1] == keyCoords[1]))
+                                {
+                                    _gameConsoleView.DisplayGameObjectInfo(key, nextTile, _gameMap.MapLayout);
+                                }
+                            } else
+                            {
+                                return;
+                            }
                         }
+                    }
                     else
                     {
                         int[] npcCoords = new int[2];
@@ -265,7 +285,7 @@ namespace TheAionProject
                                     }
                                     ActionMenu.currentMenu = ActionMenu.CurrentMenu.MapMenu;
                                     _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
-                                    
+
                                     //
                                     // call function to handle NPC interaction
                                     // npcInteraction(npc);

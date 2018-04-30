@@ -1,1 +1,3 @@
 On load, iterate through game objects and populate map with the respective icon based on gameObject coordinates.
+
+Currently player has no choice to pick up item -> items added to inventory automatically upon encounter

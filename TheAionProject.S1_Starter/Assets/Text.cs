@@ -148,6 +148,19 @@ namespace TheAionProject
             return messageBoxText;
         }
 
+        public static string LookAt(GameObject gameObject)
+        {
+            string messageBoxText = "";
+
+            messageBoxText =
+                $"You found {gameObject.Description}\n" +
+                " \n" +
+                $"The {gameObject.Name} has been added to your inventory\n" +
+                " \n";
+
+            return messageBoxText;
+        }
+
         #endregion
 
         #endregion
