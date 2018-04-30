@@ -6,11 +6,31 @@ using System.Threading.Tasks;
 
 namespace TheAionProject
 {
-    public class Survivor : NPC, ISpeak
+    public class Survivor : NPC, ISpeak, IGiveItem
     {
         public override int Id { get; set; }
         public override string Description { get; set; }
         public List<string> Messages { get; set; }
+
+        public List<TravelerObject> _itemsToGive;
+
+        public List<TravelerObject> ItemsToGive
+        {
+            get { return _itemsToGive; }
+            set { _itemsToGive = value; }
+        }
+
+        public List<TravelerObject> GiveItems()
+        {
+            if (ItemsToGive != null)
+            {
+                return ItemsToGive;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public string Speak()
         {
@@ -20,7 +40,7 @@ namespace TheAionProject
             }
             else
             {
-                return $"My name is {base.Name} and I am a {base.Race}";
+                return "You approach the survivor, but they have nothing to say...";
             }
         }
 

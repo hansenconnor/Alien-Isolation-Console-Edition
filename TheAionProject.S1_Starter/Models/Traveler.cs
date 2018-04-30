@@ -28,6 +28,8 @@ namespace TheAionProject
         private CompanionName _travelerCompanionName;
         private bool _earthBorn;
         private List<TravelerObject> _inventory;
+
+        // int double
         #endregion
 
 

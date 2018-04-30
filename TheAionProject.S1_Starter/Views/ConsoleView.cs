@@ -114,13 +114,32 @@ namespace TheAionProject
 
             string message = npc.Name + ": \"" + speakingNpc.Speak() + "\"";
 
-            if (message == "")
-            {
-                message = "You approach the survivor, but they have nothing to say...";
-            }
+            //if (message == "")
+            //{
+            //    message = "You approach the survivor, but they have nothing to say...";
+            //}
 
             // TODO
             DisplayGamePlayScreen("Speak to Character",message, ActionMenu.NpcMenu,"");
+            DisplayMessage("Press any key to continue...");
+            Console.ReadKey();
+        }
+
+        public void DisplayItemReceived(NPC npc)
+        {
+            IGiveItem givingNpc = npc as IGiveItem;
+
+            List<TravelerObject>items = givingNpc.GiveItems();
+
+            string message = "You received the following item(s): ";
+
+            foreach (TravelerObject item in items)
+            {
+                _gameTraveler.Inventory.Add(item);
+                message += " \n" + item.Name;
+            }
+
+            DisplayGamePlayScreen("Speak to Character", message, ActionMenu.NpcMenu, "");
             DisplayMessage("Press any key to continue...");
             Console.ReadKey();
         }

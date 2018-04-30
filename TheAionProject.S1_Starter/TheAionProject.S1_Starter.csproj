@@ -55,6 +55,7 @@
     <Compile Include="Models\Enums\MapObjectType.cs" />
     <Compile Include="Models\Enums\TravelerObjectType.cs" />
     <Compile Include="Models\GameObject.cs" />
+    <Compile Include="Models\IGiveItem.cs" />
     <Compile Include="Models\ISpeak.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\MapLocation.cs" />

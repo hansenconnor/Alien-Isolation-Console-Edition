@@ -60,7 +60,7 @@ namespace TheAionProject
             //
             // add initial items to the traveler's inventory
             //
-            _gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(1) as TravelerObject);
+            //_gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(1) as TravelerObject);
 
             Console.CursorVisible = false;
         }
@@ -173,50 +173,63 @@ namespace TheAionProject
                             // check if object is key
                             if (travelerObject.Type == TravelerObjectType.Key)
                             {
-                                // TODO -> use mapObjects list in UniverseObjects.cs instead
-                                // get the id of the object which the key can be used to 
-                                foreach (KeyValuePair<int[], int> entry in _gameMap.objectCoordinates)
+                                foreach (MapObject door in UniverseObjects.mapObjects)
                                 {
-                                    // 
-                                    // check if the key unlocks id matches the door id
-                                    if ((entry.Key[0] == doorCoords[0]) && (entry.Key[1] == doorCoords[1]))
+                                    // check if the door coordinates correspond to the coordinates of the next tile
+                                    if ((door.Coords[0] == doorCoords[0]) && (door.Coords[1] == doorCoords[1]))
                                     {
-                                        //Console.WriteLine("asdf asd aSD");
-                                        // player has key to open door
+                                        // 
+                                        // check if the key unlocks id matches the door id
+                                        if (travelerObject.UnlocksId == door.Id)
+                                        {
+                                            //Console.WriteLine("asdf asd aSD");
+                                            // player has key to open door
 
-                                        _gameMap.MapLayout[nextTile[0], nextTile[1]] = "@";
+                                            _gameMap.MapLayout[nextTile[0], nextTile[1]] = "@";
 
-                                        // update the game map array
-                                        _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+                                            // update the game map array
+                                            _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
 
-                                        // update the game map string
-                                        gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
+                                            // update the game map string
+                                            gameMapString = _gameMap.convertMapToString(_gameMap.MapLayout);
 
-                                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
+                                            _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
+                                        }
+                                        else { _gameConsoleView.DisplayInputErrorMessage("You don't have a key that unlocks this door!"); };
                                     }
-                                    else { _gameConsoleView.DisplayInputErrorMessage("You don't have a key that unlocks this door!"); };
                                 }
                             }else { _gameConsoleView.DisplayInputErrorMessage("You need a key to unlock this door!"); }
                             //command.Parameters.AddWithValue(kvp.Key, kvp.Value);
                         }
                     else
                     {
+                        int[] npcCoords = new int[2];
+                        npcCoords[0] = nextTile[0];
+                        npcCoords[1] = nextTile[1];
                         // display the NPC menu
                         foreach (NPC npc in _gameUniverse.Npcs)
                         {
-                            if (npc.Icon == _gameMap.MapLayout[nextTile[0], nextTile[1]])
+                            // check if the coordinates match
+                            if ((npc.Coords[0] == npcCoords[0]) && (npc.Coords[1] == npcCoords[1]))
                             {
-                                if (npc is ISpeak)
+                                if (npc.Icon == _gameMap.MapLayout[nextTile[0], nextTile[1]])
                                 {
-                                    // display greeting
-                                    _gameConsoleView.DisplayTalkTo(npc);
+                                    if (npc is ISpeak)
+                                    {
+                                        // display greeting
+                                        _gameConsoleView.DisplayTalkTo(npc);
+                                    }
+                                    if (npc is IGiveItem)
+                                    {
+                                        _gameConsoleView.DisplayItemReceived(npc);
+                                    }
+                                    _gameConsoleView.DisplayGamePlayScreen("NPC Menu", "Select an operation from the menu.", ActionMenu.NpcMenu, "");
+                                    ActionMenu.currentMenu = ActionMenu.CurrentMenu.NPCMenu;
+                                    //
+                                    // call function to handle NPC interaction
+                                    // npcInteraction(npc);
+                                    //
                                 }
-                                _gameConsoleView.DisplayGamePlayScreen("NPC Menu", "Select an operation from the menu.", ActionMenu.NpcMenu, "");
-                                ActionMenu.currentMenu = ActionMenu.CurrentMenu.NPCMenu;
-                                //
-                                // call function to handle NPC interaction
-                                // npcInteraction(npc);
-                                //
                             }
                         }
                     }

@@ -32,12 +32,15 @@ namespace TheAionProject
             // get rows from text file
             // var rows = File.ReadLines(@"C:\Users\connor\Desktop\Alien-Isolation-Console-Edition\TheAionProject.S1_Starter\Models\mapLayout.txt").Count();
 
-            string[,] item = new string[13, 52];
+            // define number of map rows. Should match rows in mapLayout.txt
+            int rows = 20;
+
+            string[,] item = new string[rows, 52];
 
             string[] lines = File.ReadAllLines(@"C:\Users\connor\Desktop\Alien-Isolation-Console-Edition\TheAionProject.S1_Starter\Models\mapLayout.txt");
             char ch = lines[1][1]; //second line's second char
 
-            for (int r = 0; r < 13; r++)
+            for (int r = 0; r < rows; r++)
             {
                 for (int c = 0; c < 52; c++)
                 {
