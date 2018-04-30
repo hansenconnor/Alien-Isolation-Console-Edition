@@ -225,6 +225,36 @@ namespace TheAionProject
             return messageBoxText;
         }
 
+        public static string VisitedLocations(List<MapLocation> mapLocations)
+        {
+            string messageBoxText =
+                "Space-Time Locations Visited\n" +
+                " \n" +
+
+                //
+                // display table header
+                //
+                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
+                "---".PadRight(10) + "----------------------".PadRight(30) + "\n";
+
+            //
+            // display all locations
+            //
+            string spaceTimeLocationList = null;
+            foreach (MapLocation location in mapLocations)
+            {
+                spaceTimeLocationList +=
+                    $"{location.ID}".PadRight(10) +
+                    $"{location.Name}".PadRight(30) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += spaceTimeLocationList;
+
+            return messageBoxText;
+        }
+
+
         public static string LookAround(MapLocation currentRoom)
         {
             string messageBoxText =

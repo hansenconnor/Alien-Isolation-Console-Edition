@@ -28,12 +28,19 @@ namespace TheAionProject
         private CompanionName _travelerCompanionName;
         private bool _earthBorn;
         private List<TravelerObject> _inventory;
+        private List<MapLocation> _locationsVisited;
 
         // int double
         #endregion
 
 
         #region PROPERTIES
+
+        public List<MapLocation> LocationsVisited
+        {
+            get { return _locationsVisited; }
+            set { _locationsVisited = value; }
+        }
         public bool EarthBorn
         {
             get { return _earthBorn; }
@@ -67,11 +74,13 @@ namespace TheAionProject
         public Traveler()
         {
             _inventory = new List<TravelerObject>();
+            _locationsVisited = new List<MapLocation>();
         }
 
         public Traveler(string name, RaceType race, int spaceTimeLocationID) : base(name, race, spaceTimeLocationID)
         {
             _inventory = new List<TravelerObject>();
+            _locationsVisited = new List<MapLocation>();
         }
 
         #endregion

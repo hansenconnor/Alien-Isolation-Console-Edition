@@ -71,6 +71,7 @@ namespace TheAionProject
             // add initial items to the traveler's inventory
             //
             //_gameTraveler.Inventory.Add(_gameUniverse.GetGameObjectById(1) as TravelerObject);
+            _gameTraveler.LocationsVisited.Add(UniverseObjects.mapLocations[0]);
 
             Console.CursorVisible = false;
         }
@@ -184,6 +185,14 @@ namespace TheAionProject
                     }
                     else if (_gameMap.MapLayout[nextTile[0], nextTile[1]] == "-")
                     {
+                        // check if new location and update locations visited list if so
+                        MapLocation currentMapRoom = _gameMap.getCurrentRoom(currentPlayerMapPosition);
+                        if (!_gameTraveler.LocationsVisited.Contains(currentMapRoom))
+                        {
+                            _gameTraveler.LocationsVisited.Add(currentMapRoom);
+                        }
+
+
                         // update the game map array
                         _gameMap.MapLayout = _gameMap.updateMap(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
 
@@ -321,6 +330,11 @@ namespace TheAionProject
 
                         case TravelerAction.ListAllNpcs:
                             _gameConsoleView.DisplayListOfNPCs();
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
+                            break;
+
+                        case TravelerAction.ListLocationsVisited:
+                            _gameConsoleView.DisplayLocationsVisited();
                             ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
                             break;
 

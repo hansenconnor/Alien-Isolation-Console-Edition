@@ -110,6 +110,7 @@ namespace TheAionProject
                     { '1', TravelerAction.ListSpaceTimeLocations },
                     { '2', TravelerAction.ListGameObjects},
                     { '3', TravelerAction.ListAllNpcs},
+                    { '4', TravelerAction.ListLocationsVisited },
                     { '0', TravelerAction.ReturnToMap }
                 }
         };

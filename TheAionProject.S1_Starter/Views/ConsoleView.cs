@@ -143,7 +143,7 @@ namespace TheAionProject
 
             List<TravelerObject>items = givingNpc.GiveItems();
 
-            if (items == null)
+            if (items == null || npc.HasItemsToGive == false)
             {
                 message = "The survivor has nothing more to offer";
                 DisplayGamePlayScreen("Speak to Character", message, ActionMenu.NpcMenu, "");
@@ -159,8 +159,11 @@ namespace TheAionProject
                     message += " \n" + item.Name;
                 }
 
+                npc.HasItemsToGive = false;
+
                 DisplayGamePlayScreen("Speak to Character", message, ActionMenu.NpcMenu, "");
                 DisplayMessage("Press any key to continue...");
+
                 Console.ReadKey();
             }
         }
@@ -168,6 +171,20 @@ namespace TheAionProject
         public void DisplayListOfNPCs()
         {
             DisplayGamePlayScreen("List: NPCs", Text.ListAllNPCs(UniverseObjects.Npcs), ActionMenu.AdminMenu, "");
+        }
+
+        public void DisplayLocationsVisited()
+        {
+            //
+            // generate a list of space time locations that have been visited
+            //
+            List<MapLocation> visitedRooms = new List<MapLocation>();
+            foreach (MapLocation room in _gameTraveler.LocationsVisited)
+            {
+                visitedRooms.Add(room);
+            }
+
+            DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedRooms), ActionMenu.MainMenu, "");
         }
 
         public void DisplayLookAround(string[,] map)

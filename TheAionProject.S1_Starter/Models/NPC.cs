@@ -10,8 +10,15 @@ namespace TheAionProject
     {
         public abstract int Id { get; set; } 
         public abstract string Description { get; set; }
+        public bool _hasItemsToGive { get; set; }
         public string _icon;
         private int[] _coords;
+
+        public bool HasItemsToGive
+        {
+            get { return _hasItemsToGive; }
+            set { _hasItemsToGive = value; }
+        }
 
         public int[] Coords
         {

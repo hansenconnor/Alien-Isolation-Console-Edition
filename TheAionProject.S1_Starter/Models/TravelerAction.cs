@@ -20,7 +20,7 @@ namespace TheAionProject
         Inventory,
         Travel,
         TravelerInfo,
-        TravelerLocationsVisited,
+        ListLocationsVisited,
         ListSpaceTimeLocations,
         ListGameObjects,
         AdminMenu,
