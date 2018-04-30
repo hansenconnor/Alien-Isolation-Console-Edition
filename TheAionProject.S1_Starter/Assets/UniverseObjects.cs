@@ -76,7 +76,7 @@ namespace TheAionProject
                 Icon = "K",
                 Name = "Door to Engine Room Hallway",
                 Description =
-                    "A kay to the Engine room hallway",
+                    "A key to the Engine room hallway",
                 Type = TravelerObjectType.Key,
                 Value = 0,
                 UnlocksId = 2,

@@ -253,11 +253,13 @@ namespace TheAionProject
 
             int firstCol = playerCoords[1] - 1;
             int lastCol = playerCoords[1] + 2;
-            
+
             //
             // check the map tiles around the player
             //
             // row above player to row below player
+            List<GameObject> objectsNearby = new List<GameObject>();
+
             for (int r = firstRow; r < lastRow; r++)
             {
                 // col left of player to col right of player
@@ -267,14 +269,14 @@ namespace TheAionProject
                     {
                         if (gameObject.Icon == _gameMap.MapLayout[r,c])
                         {
-                            Console.WriteLine(gameObject.Name);
+                            objectsNearby.Add(gameObject);
                         }
                     }
                 }
             }
 
             // display name and description of location as well as items nearby
-            string messageBoxText = Text.LookAround(currentMapRoom) + Environment.NewLine + Environment.NewLine;
+            string messageBoxText = Text.LookAround(currentMapRoom, objectsNearby) + Environment.NewLine + Environment.NewLine;
             DisplayGamePlayScreen("Current Location", messageBoxText, ActionMenu.MainMenu, "");
         }
 

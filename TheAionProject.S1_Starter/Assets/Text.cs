@@ -284,12 +284,45 @@ namespace TheAionProject
         }
 
 
-        public static string LookAround(MapLocation currentRoom)
+        public static string LookAround(MapLocation currentRoom, List<GameObject> objectsNearby)
         {
-            string messageBoxText =
-                $"Current Location: {currentRoom.Name}\n" +
-                " \n" +
-                currentRoom.Description;
+            //string messageBoxText =
+            //    $"Current Location: {currentRoom.Name}\n" +
+            //    " \n" +
+            //    currentRoom.Description;
+
+
+
+            //return messageBoxText;
+            string messageBoxText = "";
+
+            //
+            // display table header
+            //
+            messageBoxText =
+            "ID".PadRight(10) +
+            "Name".PadRight(30) +
+            "Type".PadRight(10) +
+            "\n" +
+            "---".PadRight(10) +
+            "----------------------------".PadRight(30) +
+            "----------------------".PadRight(10) +
+            "\n";
+
+            //
+            // display all traveler objects in rows
+            //
+            string listOfObjectsNearby = null;
+            foreach (GameObject gameObject in objectsNearby)
+            {
+                listOfObjectsNearby +=
+                    $"{gameObject.Id}".PadRight(10) +
+                    $"{gameObject.Name}".PadRight(30) +
+                    $"{gameObject.Description}".PadRight(10) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += listOfObjectsNearby;
 
             return messageBoxText;
         }
