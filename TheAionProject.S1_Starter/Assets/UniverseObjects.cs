@@ -42,13 +42,13 @@ namespace TheAionProject
             new MapLocation
             {
                 ID = 4,
-                Name = "Storage Room 1",
+                Name = "Engine Room 1",
                 Bounds = new MapLocation.LocationBounds(12,1,18,14)
             },
             new MapLocation
             {
                 ID = 5,
-                Name = "Storage Room 2",
+                Name = "Engine Room 2",
                 Bounds = new MapLocation.LocationBounds(12,20,18,36)
             },
             new MapLocation
@@ -112,7 +112,6 @@ namespace TheAionProject
                 },
                 Description = "A survivor cluching what appears to be a key card."
             },
-
             new Survivor()
             {
                 Id = 2,
@@ -121,7 +120,25 @@ namespace TheAionProject
                 Icon = "S",
                 HasItemsToGive = false,
                 Description = "An injured surviror laying on the floor."
-            }
+            },
+            new Engineer()
+            {
+                Id = 3,
+                Name="Engine Room Engineer",
+                Coords = new int[2] { 15,2 },
+                Icon = "E",
+                Description = "An engineer operating some sort of computer interface."
+            },
+            new Engineer()
+            {
+                Id = 4,
+                Name="Engine Room Engineer 2",
+                Coords = new int[2] { 2,4 },
+                DoorToUnlockCoords = new int[2] { 15,19 },
+                Icon = "E",
+                Description = "An Engineer sending an S.O.S via a control console."
+            },
+
         };
     }
 }

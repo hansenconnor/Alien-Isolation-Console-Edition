@@ -283,6 +283,10 @@ namespace TheAionProject
                                     {
                                         _gameConsoleView.DisplayItemReceived(npc);
                                     }
+                                    if (npc is IModifyMap)
+                                    {
+                                        _gameConsoleView.DisplayNpcModifyMap(npc, _gameMap.MapLayout);
+                                    }
                                     ActionMenu.currentMenu = ActionMenu.CurrentMenu.MapMenu;
                                     _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
 

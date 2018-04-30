@@ -65,7 +65,7 @@ namespace TheAionProject
         //
         public static ConsoleColor InputBoxBackgroundColor = ConsoleColor.Black;
         public static ConsoleColor InputBoxForegroundColor = ConsoleColor.Gray;
-        public static ConsoleColor InputBoxErrorMessageForegroundColor = ConsoleColor.Red;
+        public static ConsoleColor InputBoxErrorMessageForegroundColor = ConsoleColor.White;
         public static ConsoleColor InputBoxBorderColor = ConsoleColor.Red;
         public static ConsoleColor InputBoxHeaderBackgroundColor = ConsoleColor.Black;
         public static ConsoleColor InputBoxHeaderForegroundColor = ConsoleColor.Gray;

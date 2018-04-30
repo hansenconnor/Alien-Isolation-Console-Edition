@@ -196,6 +196,17 @@ namespace TheAionProject
             }
         }
 
+        public void DisplayNpcModifyMap(NPC npc, string[,] map)
+        {
+
+            // TODO -> handle case: npc doesn't have coords to update
+            IModifyMap modifyingMapNpc = npc as IModifyMap;
+            int[] coordsToUpdate = modifyingMapNpc.getCoordsToUpdate();
+
+            map[coordsToUpdate[0],coordsToUpdate[1]] = "-";
+
+        }
+
         public void DisplayListOfNPCs()
         {
             DisplayGamePlayScreen("List: NPCs", Text.ListAllNPCs(UniverseObjects.Npcs), ActionMenu.AdminMenu, "");
