@@ -81,14 +81,16 @@ namespace TheAionProject
                         IsConsumable = false,
                         IsVisible = true
                     }
-                }
+                },
+                Description = "A survivor cluching what appears to be a key card."
             },
 
             new Survivor()
             {
                 Name = "Survivor",
                 Coords = new int[2] { 4,2 },
-                Icon = "S"
+                Icon = "S",
+                Description = "An injured surviror laying on the floor."
             }
         };
     }

@@ -196,6 +196,35 @@ namespace TheAionProject
             return statusBoxText;
         }
 
+        public static string ListAllNPCs(List<NPC> NPCs)
+        {
+            string messageBoxText = "";
+
+            messageBoxText =
+            "ID".PadRight(10) +
+            "Name".PadRight(30) +
+            "Description".PadRight(10) +
+            "\n" +
+            "---".PadRight(10) +
+            "----------------------------".PadRight(30) +
+            "----------------------".PadRight(10) +
+            "\n";
+
+            string inventoryObjectRows = null;
+            foreach (NPC npc in NPCs)
+            {
+                inventoryObjectRows +=
+                    $"{npc.Id}".PadRight(10) +
+                    $"{npc.Name}".PadRight(30) +
+                    $"{npc.Description}".PadRight(10) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += inventoryObjectRows;
+
+            return messageBoxText;
+        }
+
         public static string LookAround(MapLocation currentRoom)
         {
             string messageBoxText =

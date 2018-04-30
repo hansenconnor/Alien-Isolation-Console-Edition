@@ -96,7 +96,8 @@ namespace TheAionProject
                     { '1', TravelerAction.TravelerInfo },
                     { '2', TravelerAction.Inventory },
                     { '3', TravelerAction.LookAround },
-                    { '4', TravelerAction.Exit }
+                    { '4', TravelerAction.AdminMenu },
+                    { '5', TravelerAction.Exit }
                 }
         };
 
@@ -108,7 +109,8 @@ namespace TheAionProject
                 {
                     { '1', TravelerAction.ListSpaceTimeLocations },
                     { '2', TravelerAction.ListGameObjects},
-                    { '0', TravelerAction.ReturnToMainMenu }
+                    { '3', TravelerAction.ListAllNpcs},
+                    { '0', TravelerAction.ReturnToMap }
                 }
         };
     }

@@ -127,21 +127,37 @@ namespace TheAionProject
 
         public void DisplayItemReceived(NPC npc)
         {
+            string message;
+
             IGiveItem givingNpc = npc as IGiveItem;
 
             List<TravelerObject>items = givingNpc.GiveItems();
 
-            string message = "You received the following item(s): ";
-
-            foreach (TravelerObject item in items)
+            if (items == null)
             {
-                _gameTraveler.Inventory.Add(item);
-                message += " \n" + item.Name;
+                message = "The survivor has nothing more to offer";
+                DisplayGamePlayScreen("Speak to Character", message, ActionMenu.NpcMenu, "");
+                Console.ReadKey();
             }
+            else
+            {
+                message = "You received the following item(s): ";
 
-            DisplayGamePlayScreen("Speak to Character", message, ActionMenu.NpcMenu, "");
-            DisplayMessage("Press any key to continue...");
-            Console.ReadKey();
+                foreach (TravelerObject item in items)
+                {
+                    _gameTraveler.Inventory.Add(item);
+                    message += " \n" + item.Name;
+                }
+
+                DisplayGamePlayScreen("Speak to Character", message, ActionMenu.NpcMenu, "");
+                DisplayMessage("Press any key to continue...");
+                Console.ReadKey();
+            }
+        }
+
+        public void DisplayListOfNPCs()
+        {
+            DisplayGamePlayScreen("List: NPCs", Text.ListAllNPCs(UniverseObjects.Npcs), ActionMenu.AdminMenu, "");
         }
 
         public void DisplayLookAround(string[,] map)
@@ -198,23 +214,43 @@ namespace TheAionProject
         /// get a action menu choice from the user
         /// </summary>
         /// <returns>action menu choice</returns>
-        public TravelerAction GetActionMenuChoice(Menu menu, ConsoleKeyInfo keyPressedInfo)
+        public TravelerAction GetActionMenuChoice(Menu menu, ConsoleKeyInfo keyPressedInfo, string gameMapString)
         {
             TravelerAction chosenAction = TravelerAction.None;
 
             //
-            // TODO validate menu choices
+            // create an array of valid keys from menu dictionary
             //
-            char keyPressed = keyPressedInfo.KeyChar;
+            char[] validKeys = menu.MenuChoices.Keys.ToArray();
 
-            if ((keyPressedInfo.Key != ConsoleKey.UpArrow) && (keyPressedInfo.Key != ConsoleKey.DownArrow) && (keyPressedInfo.Key != ConsoleKey.LeftArrow) && (keyPressedInfo.Key != ConsoleKey.RightArrow))
+            //
+            // validate key pressed as in MenuChoices dictionary
+            //
+            char keyPressed;
+           
+            keyPressed = keyPressedInfo.KeyChar;
+
+            do
             {
-                chosenAction = menu.MenuChoices[keyPressed];
-            }
-            else
-            {
-                return TravelerAction.None;
-            }    
+                if (!validKeys.Contains(keyPressed))
+                {
+                    DisplayMessage("That's not a valid key! Try again or press a movement key to return to the map.");
+                    keyPressedInfo = Console.ReadKey(true);
+                    keyPressed = keyPressedInfo.KeyChar;
+                }
+
+                if ((keyPressedInfo.Key == ConsoleKey.UpArrow) || (keyPressedInfo.Key == ConsoleKey.DownArrow) || (keyPressedInfo.Key == ConsoleKey.LeftArrow) || (keyPressedInfo.Key == ConsoleKey.RightArrow))
+                {
+                    DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
+                    chosenAction = TravelerAction.None;
+                    return chosenAction;
+                }
+
+            } while (!validKeys.Contains(keyPressed));
+                
+                
+            chosenAction = menu.MenuChoices[keyPressed];
+            
 
             return chosenAction;
         }

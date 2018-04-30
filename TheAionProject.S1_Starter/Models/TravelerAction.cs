@@ -28,6 +28,7 @@ namespace TheAionProject
         TalkTo,
         ReturnToMap,
         NonplayerCharacterMenu,
+        ListAllNpcs,
         Exit
     }
 }

@@ -234,66 +234,73 @@ namespace TheAionProject
                         }
                     }
                 }
-                
 
-                if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MapMenu)
+                else
                 {
-                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MapMenu, keyInfo);
-                }
-                else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MainMenu)
-                {
-                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu, keyInfo);
-                }
-                else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.NPCMenu)
-                {
-                    travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.NpcMenu, keyInfo);
-                }
+                    if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MapMenu)
+                    {
+                        travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MapMenu, keyInfo, gameMapString);
+                    }
+                    else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.MainMenu)
+                    {
+                        travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.MainMenu, keyInfo, gameMapString);
+                    }
+                    else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.NPCMenu)
+                    {
+                        travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.NpcMenu, keyInfo, gameMapString);
+                    }
+                    else if (ActionMenu.currentMenu == ActionMenu.CurrentMenu.AdminMenu)
+                    {
+                        travelerActionChoice = _gameConsoleView.GetActionMenuChoice(ActionMenu.AdminMenu, keyInfo, gameMapString);
+                    }
 
-                switch (travelerActionChoice)
-                {
-                    case TravelerAction.None:
-                        break;
+                    switch (travelerActionChoice)
+                    {
+                        case TravelerAction.None:
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.MapMenu;
+                            break;
 
-                    case TravelerAction.TalkTo:
-                        //_gameConsoleView.DisplayTalkTo(npc);
-                        break;
+                        case TravelerAction.TalkTo:
+                            //_gameConsoleView.DisplayTalkTo(npc);
+                            break;
 
-                    case TravelerAction.ReturnToMap:
-                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MapMenu;
-                        _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
-                        break;
+                        case TravelerAction.ReturnToMap:
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.MapMenu;
+                            _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
+                            break;
 
-                    case TravelerAction.TravelerInfo:
-                        _gameConsoleView.DisplayTravelerInfo();
-                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
-                        break;
+                        case TravelerAction.TravelerInfo:
+                            _gameConsoleView.DisplayTravelerInfo();
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
+                            break;
 
-                    case TravelerAction.LookAround:
-                        _gameConsoleView.DisplayLookAround(_gameMap.MapLayout);
-                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
-                        break;
+                        case TravelerAction.LookAround:
+                            _gameConsoleView.DisplayLookAround(_gameMap.MapLayout);
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
+                            break;
 
-                    case TravelerAction.AdminMenu:
-                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
-                        _gameConsoleView.DisplayGamePlayScreen("Admin Menu", "Select an operation from the menu.", ActionMenu.AdminMenu, "");
-                        break;
+                        case TravelerAction.AdminMenu:
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
+                            _gameConsoleView.DisplayGamePlayScreen("Admin Menu", "Select an operation from the menu.", ActionMenu.AdminMenu, "");
+                            break;
 
-                    case TravelerAction.ReturnToMainMenu:
-                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
-                        _gameConsoleView.DisplayGamePlayScreen("Current Location", "Main Menu", ActionMenu.MainMenu, "");
-                        break;
+                        case TravelerAction.Inventory:
+                            _gameConsoleView.DisplayInventory();
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
+                            break;
 
-                    case TravelerAction.Inventory:
-                        _gameConsoleView.DisplayInventory();
-                        ActionMenu.currentMenu = ActionMenu.CurrentMenu.MainMenu;
-                        break;
+                        case TravelerAction.ListAllNpcs:
+                            _gameConsoleView.DisplayListOfNPCs();
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
+                            break;
 
-                    case TravelerAction.Exit:
-                        _playingGame = false;
-                        break;
+                        case TravelerAction.Exit:
+                            _playingGame = false;
+                            break;
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
                 }
             }
 
