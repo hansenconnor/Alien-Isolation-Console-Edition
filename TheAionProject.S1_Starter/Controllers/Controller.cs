@@ -176,6 +176,9 @@ namespace TheAionProject
                     // check if the player has entered a certain room and then modify a metric
                     bool hasVisited = _gameConsoleView.checkPlayerVisited("Engine Room 2");
 
+                    
+
+
                     if (currentPlayerRoom.Name == "Engine Room 2")
                     {
                         if (!hasVisited)
@@ -188,6 +191,13 @@ namespace TheAionProject
 
                     // get the icon for the desired tile
                     int [] nextTile = _gameMap.getTile(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
+
+                    // check if player has reached end of game tile
+                    if ((nextTile[0]) == 18 && (nextTile[1] == 44))
+                    {
+                        _gameTimer.Stop();
+                        _gameConsoleView.DisplayGameSuccessScreen(timeRemaining);
+                    }
 
                     // refactor update map to check if desired position is available or if there is an NPC or item etc.
                     // refactor update map to return bool 

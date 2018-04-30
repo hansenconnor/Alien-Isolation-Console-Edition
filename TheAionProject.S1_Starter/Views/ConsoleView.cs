@@ -473,7 +473,6 @@ namespace TheAionProject
 
         public void DisplayGameOverScreen()
         {
-
             Console.BackgroundColor = ConsoleTheme.SplashScreenBackgroundColor;
             Console.ForegroundColor = ConsoleTheme.SplashScreenForegroundColor;
             Console.Clear();
@@ -494,6 +493,35 @@ namespace TheAionProject
 
 
             Console.ReadLine();
+
+            Environment.Exit(0);
+        }
+
+        public void DisplayGameSuccessScreen(int timeRemaining)
+        {
+            Console.BackgroundColor = ConsoleTheme.SplashScreenBackgroundColor;
+            Console.ForegroundColor = ConsoleTheme.SplashScreenForegroundColor;
+            Console.Clear();
+            Console.CursorVisible = false;
+
+
+            Console.SetCursorPosition(0, 10);
+            string tabSpace = new String(' ', 35);
+            Console.WriteLine(tabSpace + @" __     __           ______                              _ _");
+            Console.WriteLine(tabSpace + @" \ \   / /          |  ____|                            | | |");
+            Console.WriteLine(tabSpace + @"  \ \_/ /__  _   _  | |__   ___  ___ __ _ _ __   ___  __| | |");
+            Console.WriteLine(tabSpace + @"   \   / _ \| | | | |  __| / __|/ __/ _` | '_ \ / _ \/ _` | |");
+            Console.WriteLine(tabSpace + @"    | | (_) | |_| | | |____\__ \ (_| (_| | |_) |  __/ (_| |_|");
+            Console.WriteLine(tabSpace + @"    |_|\___/ \__,_| |______|___/\___\__,_| .__/ \___|\__,_(_)");
+            Console.WriteLine(tabSpace + @"                                                             ");
+            Console.SetCursorPosition(55, 20);
+            Console.Write($"Time Remaining: {timeRemaining} seconds");
+            Console.SetCursorPosition(80, 25);
+            Console.Write("Press any key to exit \n");
+
+
+
+            Console.ReadKey();
 
             Environment.Exit(0);
         }
