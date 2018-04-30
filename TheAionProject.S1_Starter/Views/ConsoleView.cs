@@ -30,6 +30,7 @@ namespace TheAionProject
         Traveler _gameTraveler;
         Universe _gameUniverse;
         Map _gameMap;
+        System.Timers.Timer _gameTimer;
 
         ViewStatus _viewStatus;
 
@@ -44,8 +45,9 @@ namespace TheAionProject
         /// <summary>
         /// default constructor to create the console view objects
         /// </summary>
-        public ConsoleView(Traveler gameTraveler, Universe gameUniverse, Map gameMap)
+        public ConsoleView(Traveler gameTraveler, Universe gameUniverse, Map gameMap, System.Timers.Timer gameTimer)
         {
+            _gameTimer = gameTimer;
             _gameTraveler = gameTraveler;
             _gameUniverse = gameUniverse;
             _gameMap = gameMap;
@@ -106,6 +108,14 @@ namespace TheAionProject
             Console.Write(theMessage);
             Console.ForegroundColor = ConsoleTheme.InputBoxForegroundColor;
             Console.CursorVisible = true;
+        }
+
+        // Function to display the updated timer
+        public void DisplayUpdateTimer(int timeRemaining)
+        {
+            int startingRow = ConsoleLayout.StatusBoxPositionTop + 5;
+            Console.SetCursorPosition(ConsoleLayout.StatusBoxPositionLeft + 3, startingRow);
+            Console.Write("Time Remaining: " + timeRemaining);
         }
 
         public void DisplayTalkTo(NPC npc)
@@ -361,6 +371,33 @@ namespace TheAionProject
             return playing;
         }
 
+        public void DisplayGameOverScreen()
+        {
+
+            Console.BackgroundColor = ConsoleTheme.SplashScreenBackgroundColor;
+            Console.ForegroundColor = ConsoleTheme.SplashScreenForegroundColor;
+            Console.Clear();
+            Console.CursorVisible = false;
+
+
+            Console.SetCursorPosition(0, 10);
+            string tabSpace = new String(' ', 35);
+            Console.WriteLine(tabSpace + @"   _____                         ____                 ");
+            Console.WriteLine(tabSpace + @"  / ____|                       / __ \                ");
+            Console.WriteLine(tabSpace + @" | |  __  __ _ _ __ ___   ___  | |  | |_   _____ _ __ ");
+            Console.WriteLine(tabSpace + @" | | |_ |/ _` | '_ ` _ \ / _ \ | |  | \ \ / / _ \ '__|");
+            Console.WriteLine(tabSpace + @" | |__| | (_| | | | | | |  __/ | |__| |\ V /  __/ |   ");
+            Console.WriteLine(tabSpace + @"  \_____|\__,_|_| |_| |_|\___|  \____/  \_/ \___|_|   ");
+            Console.WriteLine(tabSpace + @"                                                                 ");
+            Console.SetCursorPosition(80, 25);
+            Console.Write("Press any key to exit");
+
+
+            Console.ReadLine();
+
+            Environment.Exit(0);
+        }
+
         public void drawMap()
         {
 
@@ -547,14 +584,14 @@ namespace TheAionProject
                 //
                 // display stats
                 //
-                int startingRow = ConsoleLayout.StatusBoxPositionTop + 3;
-                int row = startingRow;
-                foreach (string statusTextLine in Text.StatusBox(_gameTraveler))
-                {
-                    Console.SetCursorPosition(ConsoleLayout.StatusBoxPositionLeft + 3, row);
-                    Console.Write(statusTextLine);
-                    row++;
-                }
+                //int startingRow = ConsoleLayout.StatusBoxPositionTop + 3;
+                //int row = startingRow;
+                //foreach (string statusTextLine in Text.StatusBox(_gameTraveler))
+                //{
+                //    Console.SetCursorPosition(ConsoleLayout.StatusBoxPositionLeft + 3, row);
+                //    Console.Write(statusTextLine);
+                //    row++;
+                //}
             }
             else
             {

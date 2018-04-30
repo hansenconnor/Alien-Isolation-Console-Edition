@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace TheAionProject
 {
@@ -17,6 +18,8 @@ namespace TheAionProject
         private Traveler _gameTraveler;
         private Map _gameMap;
         private bool _playingGame;
+        private System.Timers.Timer _gameTimer;
+        private int timeRemaining;
 
         #endregion
 
@@ -49,11 +52,18 @@ namespace TheAionProject
         /// </summary>
         private void InitializeGame()
         {
+            _gameTimer = new System.Timers.Timer();
+            _gameTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            _gameTimer.Interval = 1000;
+            _gameTimer.Enabled = true;
+            timeRemaining = 180;
+
+
             _gameTraveler = new Traveler();
             _gameUniverse = new Universe();
             _gameMap = new Map();
 
-            _gameConsoleView = new ConsoleView(_gameTraveler, _gameUniverse, _gameMap);
+            _gameConsoleView = new ConsoleView(_gameTraveler, _gameUniverse, _gameMap, _gameTimer);
             
             _playingGame = true;
 
@@ -64,6 +74,24 @@ namespace TheAionProject
 
             Console.CursorVisible = false;
         }
+
+        // Specify what you want to happen when the Elapsed event is raised.
+        private  void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+            if (timeRemaining == 0)
+            {
+                _playingGame = false;
+                _gameTimer.Stop();
+                _gameConsoleView.DisplayGameOverScreen();
+            }
+            else
+            {
+                _gameConsoleView.DisplayUpdateTimer(timeRemaining);
+                timeRemaining--;
+            }
+            
+        }
+
 
         /// <summary>
         /// method to manage the application setup and game loop
@@ -120,6 +148,8 @@ namespace TheAionProject
             //
             _gameConsoleView.DisplayGamePlayScreen("Current Location", gameMapString, ActionMenu.MapMenu, "");
 
+
+            _gameTimer.Start();
             //
             // game loop
             //
@@ -303,7 +333,6 @@ namespace TheAionProject
                     }
                 }
             }
-
             //
             // close the application
             //
