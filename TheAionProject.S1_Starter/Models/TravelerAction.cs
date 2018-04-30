@@ -21,7 +21,7 @@ namespace TheAionProject
         Travel,
         TravelerInfo,
         ListLocationsVisited,
-        ListSpaceTimeLocations,
+        ListAllLocations,
         ListGameObjects,
         AdminMenu,
         ReturnToMainMenu,

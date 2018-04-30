@@ -31,8 +31,7 @@ namespace TheAionProject
             MenuTitle = "NPC Menu",
             MenuChoices = new Dictionary<char, TravelerAction>()
                     {
-                        { '1', TravelerAction.TalkTo },
-                        { '2', TravelerAction.ReturnToMap }
+                        { '1', TravelerAction.ReturnToMap }
                     }
         };
 
@@ -73,9 +72,10 @@ namespace TheAionProject
             MenuChoices = new Dictionary<char, TravelerAction>()
                 {
                     { '1', TravelerAction.TravelerInfo },
-                    { '2', TravelerAction.ReturnToMap },
-                    { '3', TravelerAction.Inventory },
-                    { '4', TravelerAction.Exit },
+                    { '2', TravelerAction.Inventory },
+                    { '3', TravelerAction.LookAround },
+                    { '4', TravelerAction.AdminMenu },
+                    { '5', TravelerAction.Exit }
                     
                     //{ '2', TravelerAction.LookAround },
                     //{ '3', TravelerAction.LookAt },
@@ -107,7 +107,7 @@ namespace TheAionProject
             MenuTitle = "Admin Menu",
             MenuChoices = new Dictionary<char, TravelerAction>()
                 {
-                    { '1', TravelerAction.ListSpaceTimeLocations },
+                    { '1', TravelerAction.ListAllLocations },
                     { '2', TravelerAction.ListGameObjects},
                     { '3', TravelerAction.ListAllNpcs},
                     { '4', TravelerAction.ListLocationsVisited },

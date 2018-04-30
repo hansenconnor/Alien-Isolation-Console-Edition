@@ -57,6 +57,7 @@ namespace TheAionProject
             _gameTimer.Interval = 1000;
             _gameTimer.Enabled = true;
             timeRemaining = 180;
+            _gameTimer.Stop();
 
 
             _gameTraveler = new Traveler();
@@ -262,8 +263,9 @@ namespace TheAionProject
                                     {
                                         _gameConsoleView.DisplayItemReceived(npc);
                                     }
-                                    _gameConsoleView.DisplayGamePlayScreen("NPC Menu", "Select an operation from the menu.", ActionMenu.NpcMenu, "");
-                                    ActionMenu.currentMenu = ActionMenu.CurrentMenu.NPCMenu;
+                                    ActionMenu.currentMenu = ActionMenu.CurrentMenu.MapMenu;
+                                    _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
+                                    
                                     //
                                     // call function to handle NPC interaction
                                     // npcInteraction(npc);
@@ -296,7 +298,6 @@ namespace TheAionProject
                     switch (travelerActionChoice)
                     {
                         case TravelerAction.None:
-                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.MapMenu;
                             break;
 
                         case TravelerAction.TalkTo:
@@ -335,6 +336,11 @@ namespace TheAionProject
 
                         case TravelerAction.ListLocationsVisited:
                             _gameConsoleView.DisplayLocationsVisited();
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
+                            break;
+
+                        case TravelerAction.ListAllLocations:
+                            _gameConsoleView.DisplayListAllMapLocations();
                             ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
                             break;
 

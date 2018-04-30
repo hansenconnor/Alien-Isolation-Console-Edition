@@ -145,8 +145,9 @@ namespace TheAionProject
 
             if (items == null || npc.HasItemsToGive == false)
             {
-                message = "The survivor has nothing more to offer";
+                message = "The survivor has nothing more to offer.";
                 DisplayGamePlayScreen("Speak to Character", message, ActionMenu.NpcMenu, "");
+                DisplayMessage("Press any key to continue...");
                 Console.ReadKey();
             }
             else
@@ -184,7 +185,18 @@ namespace TheAionProject
                 visitedRooms.Add(room);
             }
 
-            DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedRooms), ActionMenu.MainMenu, "");
+            DisplayGamePlayScreen("Space-Time Locations Visited", Text.VisitedLocations(visitedRooms), ActionMenu.AdminMenu, "");
+        }
+
+
+        //
+        // List all map locations
+        //
+        public void DisplayListAllMapLocations()
+        {
+            // display id and name of all map locations
+            string messageBoxText = Text.ListAllMapLocations() + Environment.NewLine + Environment.NewLine;
+            DisplayGamePlayScreen("Locations", messageBoxText, ActionMenu.AdminMenu, "");
         }
 
         public void DisplayLookAround(string[,] map)
@@ -696,10 +708,10 @@ namespace TheAionProject
         /// <summary>
         /// get the player's initial information at the beginning of the game
         /// </summary>
-        /// <returns>traveler object with all properties updated</returns>
+        /// <returns>player object with all properties updated</returns>
         public Traveler GetInitialTravelerInfo()
         {
-            Traveler traveler = new Traveler();
+            Traveler player = new Traveler();
 
             //
             // intro
@@ -708,46 +720,46 @@ namespace TheAionProject
             GetContinueKey();
 
             //
-            // get traveler's name
+            // get player's name
             //
             DisplayGamePlayScreen("Mission Initialization - Name", Text.InitializeMissionGetTravelerName(), ActionMenu.MissionIntro, "");
             DisplayInputBoxPrompt("Enter your name: ");
-            traveler.Name = GetString();
+            player.Name = GetString();
 
             //
-            // get traveler's age
+            // get player's age
             //
-            DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(traveler.Name), ActionMenu.MissionIntro, "");
+            DisplayGamePlayScreen("Mission Initialization - Age", Text.InitializeMissionGetTravelerAge(player.Name), ActionMenu.MissionIntro, "");
             int gameTravelerAge;
 
-            GetInteger($"Enter your age {traveler.Name}: ", 0, 1000000, out gameTravelerAge);
-            traveler.Age = gameTravelerAge;
+            GetInteger($"Enter your age {player.Name}: ", 0, 1000000, out gameTravelerAge);
+            player.Age = gameTravelerAge;
 
             //
-            // get traveler's race
+            // get player's race
             //
-            DisplayGamePlayScreen("Mission Initialization - Race", Text.InitializeMissionGetTravelerRace(traveler), ActionMenu.MissionIntro, "");
-            DisplayInputBoxPrompt($"Enter your race {traveler.Name}: ");
-            traveler.Race = GetRace();
+            DisplayGamePlayScreen("Mission Initialization - Race", Text.InitializeMissionGetTravelerRace(player), ActionMenu.MissionIntro, "");
+            DisplayInputBoxPrompt($"Enter your race {player.Name}: ");
+            player.Race = GetRace();
 
             //
-            // get traveler's home planet
+            // get player's home planet
             //
-            DisplayGamePlayScreen("Mission Initialization - Home Planet", Text.InitializeMissionGetTravelerHomePlanet(traveler.Name), ActionMenu.MissionIntro, "");
+            DisplayGamePlayScreen("Mission Initialization - Home Planet", Text.InitializeMissionGetTravelerHomePlanet(player.Name), ActionMenu.MissionIntro, "");
             DisplayInputBoxPrompt("Enter your home planet: ");
-            traveler.HomePlanet = GetString();
+            player.HomePlanet = GetString();
 
             //
-            // get name of traveler's companion
+            // get name of player's companion
             //
-            DisplayGamePlayScreen("Mission Initialization - Companion Name", Text.InitializeMissionGetTravelerCompanionName(traveler), ActionMenu.MissionIntro, "");
+            DisplayGamePlayScreen("Mission Initialization - Companion Name", Text.InitializeMissionGetTravelerCompanionName(player), ActionMenu.MissionIntro, "");
             DisplayInputBoxPrompt("Enter your Companion's name: ");
-            traveler.travelerCompanionName = GetCompanionName();
+            player.travelerCompanionName = GetCompanionName();
 
             //
-            // echo the traveler's info
+            // echo the player's info
             //
-            //DisplayGamePlayScreen("Mission Initialization - Complete", Text.InitializeMissionEchoTravelerInfo(traveler), ActionMenu.MissionIntro, "");
+            //DisplayGamePlayScreen("Mission Initialization - Complete", Text.InitializeMissionEchoTravelerInfo(player), ActionMenu.MissionIntro, "");
             //GetContinueKey();
 
             // 
@@ -755,7 +767,7 @@ namespace TheAionProject
             //
             _viewStatus = ViewStatus.PlayingGame;
 
-            return traveler;
+            return player;
         }
 
         public void DisplayInventory()

@@ -19,30 +19,13 @@ namespace TheAionProject
         public static string MissionIntro()
         {
             string messageBoxText =
-            "You have narrowly escaped the alien and now you must escape the space station. " +
+            "You have narrowly escaped an alien that is aboard your ship and now you must escape. " +
             "Work your way to the bridge and reset the controls for the esape pods " +
             "so you can make your escape. " +
             " \n" +
             "Press the Esc key to exit the game at any point.\n" +
             " \n" +
-            "Your mission begins now.\n" +
-            " \n" +
-            "\tYour first task will be to set up the initial parameters of your mission.\n" +
-            " \n" +
-            "\tPress any key to begin the Mission Initialization Process.\n";
-
-            return messageBoxText;
-        }
-
-        public static string CurrrentLocationInfo()
-        {
-            string messageBoxText =
-            "You are now in the Norlon Corporation research facility located in " +
-            "the city of Heraklion on the north coast of Crete. You have passed through " +
-            "heavy security and descended an unknown number of levels to the top secret " +
-            "research lab for the Aion Project.\n" +
-            " \n" +
-            "\tChoose from the menu options to proceed.\n";
+            "Your mission begins now.\n";
 
             return messageBoxText;
         }
@@ -158,7 +141,7 @@ namespace TheAionProject
                 $"\tTraveler Home Planet: {gameTraveler.HomePlanet}\n" +
                 $"\tTraveler Greeting: {gameTraveler.Greeting()}\n" +
                 $"\tEarthborn Status: {gameTraveler.EarthBorn}\n" +
-                $"\tCompanion Name: {gameTraveler.travelerCompanionName}\n" +
+                $"\tCompanion: {gameTraveler.travelerCompanionName}\n" +
                 " \n" +
                 "Press any key to begin your mission.";
 
@@ -194,6 +177,39 @@ namespace TheAionProject
             statusBoxText.Add($"Traveler's Age: {traveler.Age}\n");
 
             return statusBoxText;
+        }
+
+
+        //
+        // List all map locations
+        //
+        public static string ListAllMapLocations()
+        {
+            string messageBoxText =
+                "All Map Locations\n" +
+                " \n" +
+
+                //
+                // display table header
+                //
+                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
+                "---".PadRight(10) + "----------------------".PadRight(30) + "\n";
+
+            //
+            // display all locations
+            //
+            string mapLocationList = null;
+            foreach (MapLocation mapLocation in UniverseObjects.mapLocations)
+            {
+                mapLocationList +=
+                    $"{mapLocation.ID}".PadRight(10) +
+                    $"{mapLocation.Name}".PadRight(30) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += mapLocationList;
+
+            return messageBoxText;
         }
 
         public static string ListAllNPCs(List<NPC> NPCs)
