@@ -116,6 +116,7 @@ namespace TheAionProject
             int startingRow = ConsoleLayout.StatusBoxPositionTop + 5;
             Console.SetCursorPosition(ConsoleLayout.StatusBoxPositionLeft + 3, startingRow);
             Console.Write("Time Remaining: " + timeRemaining);
+            Console.SetCursorPosition(ConsoleLayout.InputBoxPositionLeft + 4, ConsoleLayout.InputBoxPositionTop + 2);
         }
 
         public void DisplayTalkTo(NPC npc)
@@ -235,6 +236,36 @@ namespace TheAionProject
             // display id and name of all map locations
             string messageBoxText = Text.ListAllMapLocations() + Environment.NewLine + Environment.NewLine;
             DisplayGamePlayScreen("Locations", messageBoxText, ActionMenu.AdminMenu, "");
+        }
+
+
+        public bool checkPlayerVisited(string nameOfLocation)
+        {
+            bool hasVisited = false;
+
+            foreach (MapLocation location in _gameTraveler.LocationsVisited)
+            {
+                if (location.Name == nameOfLocation)
+                {
+                    hasVisited = true;
+                }
+                else
+                {
+                    hasVisited = false;
+                }
+            }
+
+            return hasVisited;
+        }
+
+        //
+        // List all game objects
+        //
+        public void DisplayListAllGameObjects()
+        {
+            // display id and name of all map locations
+            string messageBoxText = Text.ListAllGameObjects() + Environment.NewLine + Environment.NewLine;
+            DisplayGamePlayScreen("Game Objects", messageBoxText, ActionMenu.AdminMenu, "");
         }
 
         public void DisplayLookAround(string[,] map)
@@ -792,9 +823,9 @@ namespace TheAionProject
             //
             // get name of player's companion
             //
-            DisplayGamePlayScreen("Mission Initialization - Companion Name", Text.InitializeMissionGetTravelerCompanionName(player), ActionMenu.MissionIntro, "");
-            DisplayInputBoxPrompt("Enter your Companion's name: ");
-            player.travelerCompanionName = GetCompanionName();
+            //DisplayGamePlayScreen("Mission Initialization - Companion Name", Text.InitializeMissionGetTravelerCompanionName(player), ActionMenu.MissionIntro, "");
+            //DisplayInputBoxPrompt("Enter your Companion's name: ");
+            //player.travelerCompanionName = GetCompanionName();
 
             //
             // echo the player's info

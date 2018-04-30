@@ -24,6 +24,13 @@ namespace TheAionProject
                 Coords = new int [2] { 11, 17 },
                 Type = MapObjectType.Door
             },
+            new MapObject
+            {
+                Id = 3,
+                Name = "Door to the Bridge",
+                Coords = new int [2] { 6, 44 },
+                Type = MapObjectType.Door
+            },
         };
 
         public static List<MapLocation> mapLocations = new List<MapLocation>()
@@ -71,15 +78,30 @@ namespace TheAionProject
         {
             new TravelerObject
             {
-                Id = 3,
+                Id = 1,
                 Coords = new int[2] { 9, 20 },
                 Icon = "K",
-                Name = "Door to Engine Room Hallway",
+                Name = "Key to Engine Room Hallway",
                 Description =
                     "A key to the Engine room hallway",
                 Type = TravelerObjectType.Key,
                 Value = 0,
                 UnlocksId = 2,
+                CanInventory = true,
+                IsConsumable = false,
+                IsVisible = true
+            },
+            new TravelerObject
+            {
+                Id = 2,
+                Coords = new int[2] { 15, 28 },
+                Icon = "K",
+                Name = "Key to the Bridge",
+                Description =
+                    "A that unlocks the door to the Bridge",
+                Type = TravelerObjectType.Key,
+                Value = 0,
+                UnlocksId = 3,
                 CanInventory = true,
                 IsConsumable = false,
                 IsVisible = true

@@ -144,6 +144,8 @@ namespace TheAionProject
             int[] currentPlayerMapPosition = new int[2];
             currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
 
+            MapLocation currentPlayerRoom;
+
             //
             // print the map
             //
@@ -169,6 +171,20 @@ namespace TheAionProject
                 {
                     // get the players current position
                     currentPlayerMapPosition = _gameMap.getCurrentPosition(_gameMap.MapLayout);
+                    currentPlayerRoom = _gameMap.getCurrentRoom(currentPlayerMapPosition);
+
+                    // check if the player has entered a certain room and then modify a metric
+                    bool hasVisited = _gameConsoleView.checkPlayerVisited("Engine Room 2");
+
+                    if (currentPlayerRoom.Name == "Engine Room 2")
+                    {
+                        if (!hasVisited)
+                        {
+                            timeRemaining -= 10;
+                            _gameConsoleView.DisplayMessage("The alien heard you! 10 Less seconds to escape!! Press any key to continue...");
+                            Console.ReadKey();
+                        }
+                    }
 
                     // get the icon for the desired tile
                     int [] nextTile = _gameMap.getTile(_gameMap.MapLayout, currentPlayerMapPosition, keyInfo.Key);
@@ -208,9 +224,10 @@ namespace TheAionProject
                         int[] doorCoords = new int[2];
                         doorCoords[0] = nextTile[0];
                         doorCoords[1] = nextTile[1];
+                        bool hasKey = false;
 
                         foreach (TravelerObject travelerObject in _gameTraveler.Inventory)
-                            // check if object is key
+                        {
                             if (travelerObject.Type == TravelerObjectType.Key)
                             {
                                 foreach (MapObject door in UniverseObjects.mapObjects)
@@ -222,6 +239,7 @@ namespace TheAionProject
                                         // check if the key unlocks id matches the door id
                                         if (travelerObject.UnlocksId == door.Id)
                                         {
+                                            hasKey = true;
                                             //Console.WriteLine("asdf asd aSD");
                                             // player has key to open door
 
@@ -235,11 +253,17 @@ namespace TheAionProject
 
                                             _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
                                         }
-                                        else { _gameConsoleView.DisplayInputErrorMessage("You don't have a key that unlocks this door!"); };
                                     }
                                 }
                             }
-                            else { _gameConsoleView.DisplayInputErrorMessage("You need a key to unlock this door!"); }
+                        }
+                        if (!hasKey)
+                        {
+                            _gameConsoleView.DisplayInputErrorMessage("You need a key to unlock this door!");
+                        }
+                        
+                        // check if object is key
+
                         //command.Parameters.AddWithValue(kvp.Key, kvp.Value);
                     }
                     else if (_gameMap.MapLayout[nextTile[0], nextTile[1]] == "K")
@@ -358,6 +382,11 @@ namespace TheAionProject
                             ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
                             break;
 
+                        case TravelerAction.ListGameObjects:
+                            _gameConsoleView.DisplayListAllGameObjects();
+                            ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
+                            break;
+
                         case TravelerAction.ListLocationsVisited:
                             _gameConsoleView.DisplayLocationsVisited();
                             ActionMenu.currentMenu = ActionMenu.CurrentMenu.AdminMenu;
@@ -392,7 +421,7 @@ namespace TheAionProject
 
             _gameTraveler.Name = traveler.Name;
             _gameTraveler.Age = traveler.Age;
-            _gameTraveler.Race = traveler.Race;
+            _gameTraveler.Race = Character.RaceType.Human;
             _gameTraveler.HomePlanet = traveler.HomePlanet;
             _gameTraveler.SpaceTimeLocationID = 1;
             _gameTraveler.travelerCompanionName = traveler.travelerCompanionName;

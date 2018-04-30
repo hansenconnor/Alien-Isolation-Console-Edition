@@ -47,7 +47,7 @@ namespace TheAionProject
         public static string InitializeMissionIntro()
         {
             string messageBoxText =
-                "Before you begin your mission we much gather your base data.\n" +
+                "Before you begin your escape we you must enter your information.\n" +
                 " \n" +
                 "You will be prompted for the required information. Please enter the information below.\n" +
                 " \n" +
@@ -59,9 +59,8 @@ namespace TheAionProject
         public static string InitializeMissionGetTravelerName()
         {
             string messageBoxText =
-                "Enter your name traveler.\n" +
-                " \n" +
-                "Please use the name you wish to be referred during your mission.";
+                "Enter your name.\n" +
+                " \n";
 
             return messageBoxText;
         }
@@ -69,7 +68,7 @@ namespace TheAionProject
         public static string InitializeMissionGetTravelerAge(string name)
         {
             string messageBoxText =
-                $"Very good then, we will call you {name} on this mission.\n" +
+                $"Very good then,{name}.\n" +
                 " \n" +
                 "Enter your age below.\n" +
                 " \n" +
@@ -81,9 +80,7 @@ namespace TheAionProject
         public static string InitializeMissionGetTravelerRace(Traveler gameTraveler)
         {
             string messageBoxText =
-                $"{gameTraveler.Name}, it will be important for us to know your race on this mission.\n" +
-                " \n" +
-                "Enter your race below.\n" +
+                $"{gameTraveler.Name}, Enter your race below.\n" +
                 " \n" +
                 "Please use the universal race classifications below." +
                 " \n";
@@ -141,7 +138,6 @@ namespace TheAionProject
                 $"\tTraveler Home Planet: {gameTraveler.HomePlanet}\n" +
                 $"\tTraveler Greeting: {gameTraveler.Greeting()}\n" +
                 $"\tEarthborn Status: {gameTraveler.EarthBorn}\n" +
-                $"\tCompanion: {gameTraveler.travelerCompanionName}\n" +
                 " \n" +
                 "Press any key to begin your mission.";
 
@@ -221,6 +217,38 @@ namespace TheAionProject
             }
 
             messageBoxText += mapLocationList;
+
+            return messageBoxText;
+        }
+
+        //
+        // List all Game Objects
+        //
+        public static string ListAllGameObjects()
+        {
+            string messageBoxText =
+                "All Game Objects\n" +
+                " \n" +
+
+                //
+                // display table header
+                //
+                "ID".PadRight(10) + "Name".PadRight(30) + "\n" +
+                "---".PadRight(10) + "----------------------".PadRight(30) + "\n";
+
+            //
+            // display all locations
+            //
+            string gameObjectsList = null;
+            foreach (GameObject gameObject in UniverseObjects.gameObjects)
+            {
+                gameObjectsList +=
+                    $"{gameObject.Id}".PadRight(10) +
+                    $"{gameObject.Name}".PadRight(30) +
+                    Environment.NewLine;
+            }
+
+            messageBoxText += gameObjectsList;
 
             return messageBoxText;
         }
