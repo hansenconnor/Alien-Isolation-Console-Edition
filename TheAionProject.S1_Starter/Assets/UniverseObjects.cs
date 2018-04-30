@@ -13,8 +13,15 @@ namespace TheAionProject
             new MapObject
             {
                 Id = 1,
-                Name = "The First Door",
+                Name = "Door to Service Hallway",
                 Coords = new int [2] { 3, 10 },
+                Type = MapObjectType.Door
+            },
+            new MapObject
+            {
+                Id = 2,
+                Name = "Door to Engine Room Hallway",
+                Coords = new int [2] { 11, 17 },
                 Type = MapObjectType.Door
             },
         };
@@ -54,7 +61,7 @@ namespace TheAionProject
             new MapLocation
             {
                 ID = 6,
-                Name = "Evacuation Cooridor",
+                Name = "Bridge",
                 Bounds = new MapLocation.LocationBounds(7,38,18,50)
             }
             // TODO add 4 more map locations
@@ -65,14 +72,14 @@ namespace TheAionProject
             new TravelerObject
             {
                 Id = 3,
-                Coords = new int[2] { 1, 2 },
+                Coords = new int[2] { 9, 20 },
                 Icon = "K",
-                Name = "Test key",
+                Name = "Door to Engine Room Hallway",
                 Description =
-                    "A test key",
+                    "A kay to the Engine room hallway",
                 Type = TravelerObjectType.Key,
                 Value = 0,
-                UnlocksId = 1,
+                UnlocksId = 2,
                 CanInventory = true,
                 IsConsumable = false,
                 IsVisible = true
@@ -121,6 +128,19 @@ namespace TheAionProject
                 HasItemsToGive = false,
                 Description = "An injured surviror laying on the floor."
             },
+            new Survivor()
+            {
+                Id = 4,
+                Name = "Unknown",
+                Coords = new int[2] { 9,19 },
+                Icon = "S",
+                HasItemsToGive = false,
+                Description = "A dead stationworker",
+                Messages = new List<string>()
+                {
+                    "A dead stationworker"
+                }
+            },
             new Engineer()
             {
                 Id = 3,
@@ -133,8 +153,12 @@ namespace TheAionProject
             {
                 Id = 4,
                 Name="Engine Room Engineer 2",
-                Coords = new int[2] { 2,4 },
+                Coords = new int[2] { 12,7 },
                 DoorToUnlockCoords = new int[2] { 15,19 },
+                Messages = new List<string>()
+                {
+                    "Quickly! I will unlock the doors to the Service Room across the hallway. Go there and unlock the door to the bridge!!!"
+                },
                 Icon = "E",
                 Description = "An Engineer sending an S.O.S via a control console."
             },

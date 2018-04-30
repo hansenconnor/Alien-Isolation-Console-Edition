@@ -203,7 +203,7 @@ namespace TheAionProject
                         // display updated map
                         _gameConsoleView.DisplayRedrawMap("Current Location", gameMapString, ActionMenu.MapMenu, "");
                     }
-                    else if (_gameMap.MapLayout[nextTile[0], nextTile[1]] == "|")
+                    else if ((_gameMap.MapLayout[nextTile[0], nextTile[1]] == "|") || (_gameMap.MapLayout[nextTile[0], nextTile[1]] == "_"))
                     {
                         int[] doorCoords = new int[2];
                         doorCoords[0] = nextTile[0];
